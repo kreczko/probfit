@@ -1,0 +1,1035 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Full API Documentation &mdash; probfit 1.0.0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="probfit 1.0.0 documentation" href="index.html" />
+    <link rel="prev" title="Welcome to probfit’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to probfit’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">probfit 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="full-api-documentation">
+<span id="fullapi"></span><h1>Full API Documentation<a class="headerlink" href="#full-api-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="cost-function">
+<span id="costfunc"></span><h2>Cost Function<a class="headerlink" href="#cost-function" title="Permalink to this headline">¶</a></h2>
+<p>Various estimators.</p>
+<div class="section" id="unbinned-likelihood">
+<h3>Unbinned Likelihood<a class="headerlink" href="#unbinned-likelihood" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="probfit.costfunc.UnbinnedLH">
+<em class="property">class </em><tt class="descclassname">probfit.costfunc.</tt><tt class="descname">UnbinnedLH</tt><a class="headerlink" href="#probfit.costfunc.UnbinnedLH" title="Permalink to this definition">¶</a></dt>
+<dd><p>UnbinnedLH(f, data, weights=None, badvalue=-100000)</p>
+<p>Construct -log(unbinned likelihood) from callable <em>f</em>
+and data points <em>data</em>. Currently can only do 1D fit.</p>
+<div class="math">
+\[\textrm{UnbinnedLH} = \sum_{x \in \textrm{data}} - \log f(x, arg \ldots)\]</div>
+<p><strong>Arguments</strong></p>
+<blockquote>
+<div><ul>
+<li><p class="first"><strong>f</strong> callable object. PDF that describe the data. The parameters
+are parsed using iminuit&#8217;s <tt class="docutils literal"><span class="pre">describe</span></tt>. The first positional
+arguement is assumed to be independent parameter. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">gauss</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span><span class="c">#good</span>
+    <span class="k">pass</span>
+<span class="k">def</span> <span class="nf">bad_gauss</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span><span class="c">#bad</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>data</strong> 1D array of data.</p>
+</li>
+<li><p class="first"><strong>weights</strong> Optional 1D array of weights. Default None(all 1).</p>
+</li>
+<li><p class="first"><strong>badvalue</strong> Optional number. The value that will be used to
+represent log(lh) (notice no minus sign). When the likelihood
+is &lt;= 0. This usually indicate your PDF is faraway from minimum
+or your PDF parameter has gone into unphysical region and return
+negative probability density. This should be a large negative
+number so that iminuit will avoid those points. Default -100000.</p>
+</li>
+</ul>
+</div></blockquote>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">There is a notable lack of <strong>sum_w2</strong> for unbinned likelihood. I
+feel like the solutions are quite sketchy. There are multiple ways
+to implement it but they don&#8217;t really scale correctly. If you
+feel like there is a correct way to implement it feel free to do so
+and write document telling people about the caveat.</p>
+</div>
+<dl class="method">
+<dt id="probfit.costfunc.UnbinnedLH.__call__">
+<tt class="descname">__call__</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#probfit.costfunc.UnbinnedLH.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute sum of -log(lh) given positional arguments.
+Position argument will be passed to pdf with independent vairable
+from <cite>data</cite> is given as the frist argument.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="probfit.costfunc.UnbinnedLH.draw">
+<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>bins=100</em>, <em>ax=None</em>, <em>bound=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>nfbins=200</em>, <em>print_par=False</em><big>)</big><a class="headerlink" href="#probfit.costfunc.UnbinnedLH.draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw comparison between histogram of data and pdf.</p>
+<p><strong>Arguments</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>minuit</strong> Optional but recommended <tt class="docutils literal"><span class="pre">iminuit.Minuit</span></tt> object.
+If minuit is not <tt class="docutils literal"><span class="pre">None</span></tt>, the pdf will be drawn using minimum
+value from minuit and parameters and error will be shown.
+If minuit is <tt class="docutils literal"><span class="pre">None</span></tt>, then pdf will be drawn using argument from
+the last call to <tt class="docutils literal"><span class="pre">__call__</span></tt>. Default <tt class="docutils literal"><span class="pre">None</span></tt></li>
+<li><strong>bins</strong> number of bins for histogram. Default 100.</li>
+<li><strong>ax</strong> matplotlib axes. If not given it will be drawn on current
+axes <tt class="docutils literal"><span class="pre">gca()</span></tt>.</li>
+<li><strong>bound</strong> bound for histogram. If <tt class="docutils literal"><span class="pre">None</span></tt> is given the bound
+will be automatically determined from the data.
+If you given PDF that&#8217;s normalied to a region but some data is
+not within the bound the picture may look funny.</li>
+<li><strong>parmloc</strong> location of parameter print out. This is passed
+directy to legend loc named parameter. Default (0.05,0.95).</li>
+<li><strong>nfbins</strong> how many point pdf should be evaluated. Default 200.</li>
+<li><strong>print_par</strong> print parameters and error on the plot. Default
+False.</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="probfit.costfunc.UnbinnedLH.show">
+<tt class="descname">show</tt><big>(</big><em>self</em>, <em>*arg</em>, <em>**kwd</em><big>)</big><a class="headerlink" href="#probfit.costfunc.UnbinnedLH.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same thing as <a class="reference internal" href="#probfit.costfunc.UnbinnedLH.draw" title="probfit.costfunc.UnbinnedLH.draw"><tt class="xref py py-meth docutils literal"><span class="pre">draw()</span></tt></a>. But show the figure immediately.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#probfit.costfunc.UnbinnedLH.draw" title="probfit.costfunc.UnbinnedLH.draw"><tt class="xref py py-meth docutils literal"><span class="pre">draw()</span></tt></a> for arguments.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="binned-likelihood">
+<h3>Binned Likelihood<a class="headerlink" href="#binned-likelihood" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="probfit.costfunc.BinnedLH">
+<em class="property">class </em><tt class="descclassname">probfit.costfunc.</tt><tt class="descname">BinnedLH</tt><a class="headerlink" href="#probfit.costfunc.BinnedLH" title="Permalink to this definition">¶</a></dt>
+<dd><p>BinnedLH(f, data, bins=40, weights=None, bound=None, badvalue=1000000, extended=False, use_w2=False)</p>
+<p>Create a Poisson Binned Likelihood object from given PDF <strong>f</strong> and
+<strong>data</strong> (raw points not histogram). Constant term and expected minimum
+are subtracted off (aka. log likelihood ratio). The exact calculation
+will depend on <strong>extended</strong> and <strong>use_w2</strong> keyword parameters.</p>
+<div class="math">
+\[\textrm{BinnedLH} = -\sum_{i \in bins} s_i \times  \left(  h_i \times \log (\frac{E_i}{h_i}) + (h_i-E_i) \right)\]</div>
+<dl class="docutils">
+<dt>where</dt>
+<dd><ul class="first">
+<li><p class="first"><span class="math">\(h_i\)</span> is sum of weight of data in ith bin.</p>
+</li>
+<li><p class="first"><span class="math">\(b_i\)</span> is the width of ith bin.</p>
+</li>
+<li><p class="first"><span class="math">\(N\)</span> is total number of data. <span class="math">\(N = \sum_i h_i\)</span>.</p>
+</li>
+<li><p class="first"><span class="math">\(E_i\)</span> is expected number of occupancy in ith bin from PDF
+calculated using average of pdf value at both sides of the bin
+<span class="math">\(l_i, r_i\)</span>. The definition for <span class="math">\(E_i\)</span> depends whether
+extended likelihood is requested.</p>
+<p>If extended likelihood is requested (<tt class="docutils literal"><span class="pre">extended=True</span></tt>):</p>
+<div class="math">
+\[E_i = \frac{f(l_i, arg\ldots )+f(r_i, arg \ldots )}{2} \times b_i\]</div>
+<p>If extended likelihood is NOT requested (<tt class="docutils literal"><span class="pre">extended=False</span></tt>):</p>
+<div class="math">
+\[E_i = \frac{f(l_i, arg \ldots )+f(r_i, arg \ldots )}{2} \times b_i \times N\]</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You are welcome to patch this with a the using real area.
+So that, it&#8217;s less sensitive to bin size. Last time I check
+ROOFIT used <strong>f</strong> evaluated at midpoint.</p>
+</div>
+</li>
+<li><p class="first"><span class="math">\(s_i\)</span> is a scaled factor. It&#8217;s 1 if <tt class="docutils literal"><span class="pre">sum_w2=False</span></tt>.
+It&#8217;s <span class="math">\(s_i = \frac{h_i}{\sum_{j \in \textrm{bin_i}} w_j^2}\)</span>
+if <tt class="docutils literal"><span class="pre">sum_w2=True</span></tt>. The factor will scale the statistics to the
+unweighted data.</p>
+</li>
+</ul>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You may wonder why there is <span class="math">\(h_i-E_i\)</span> added at the end
+for each term of the sum. They sum up to zero anyway.
+The reason is the precision near the minimum. If we taylor
+expand the logarithmic term near <span class="math">\(h_i\approx E_i\)</span> then
+the first order term will be <span class="math">\(h_i-E_i\)</span>. Subtracting this
+term at the end gets us the nice pure parabolic behavior for
+each term at the minimum.</p>
+</div>
+</dd>
+</dl>
+<p><strong>Arguments</strong></p>
+<blockquote>
+<div><ul>
+<li><p class="first"><strong>f</strong> callable object. PDF that describe the data. The parameters
+are parsed using iminuit&#8217;s <tt class="docutils literal"><span class="pre">describe</span></tt>. The first positional
+arguement is assumed to be independent parameter. For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">gauss</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span><span class="c">#good</span>
+    <span class="k">pass</span>
+<span class="k">def</span> <span class="nf">bad_gauss</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span><span class="c">#bad</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>data</strong> 1D array of data. This is raw data not histogrammed
+data.</p>
+</li>
+<li><p class="first"><strong>bins</strong> number of bins data should be histogrammed. Default 40.</p>
+</li>
+<li><p class="first"><strong>weights</strong> Optional 1D array of weights. Default <tt class="docutils literal"><span class="pre">None</span></tt>
+(all 1&#8217;s).</p>
+</li>
+<li><p class="first"><strong>bound</strong> tuple(min,max). Histogram bound. If <tt class="docutils literal"><span class="pre">None</span></tt> is given,
+bound is automatically determined from data. Default None.</p>
+</li>
+<li><p class="first"><strong>badvalue</strong> Optional number. The value that will be used to
+represent log(lh) (notice no minus sign). When the likelihood
+is &lt;= 0. This usually indicate your PDF is faraway from minimum
+or your PDF parameter has gone into unphysical region and return
+negative probability density. This should be a large POSITIVE
+number so that iminuit will avoid those points. Default 100000.</p>
+</li>
+<li><p class="first"><strong>extended</strong> Boolean whether this likelihood should be extended
+likelihood or not. Default False.</p>
+</li>
+<li><p class="first"><strong>use_w2</strong> Scale -log likelihood so that to the original
+unweighted statistics. Default False.</p>
+</li>
+</ul>
+</div></blockquote>
+<dl class="method">
+<dt id="probfit.costfunc.BinnedLH.__call__">
+<tt class="descname">__call__</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedLH.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate sum -log(poisson binned likelihood) given positional
+arguments</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="probfit.costfunc.BinnedLH.draw">
+<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>ax=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>nfbins=200</em>, <em>print_par=False</em><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedLH.draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw comparison between histogram of data and pdf.</p>
+<p><strong>Arguments</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>minuit</strong> Optional but recommended <tt class="docutils literal"><span class="pre">iminuit.Minuit</span></tt> object.
+If minuit is not <tt class="docutils literal"><span class="pre">None</span></tt>, the pdf will be drawn using minimum
+value from minuit and parameters and error will be shown.
+If minuit is <tt class="docutils literal"><span class="pre">None</span></tt>, then pdf will be drawn using argument from
+the last call to <tt class="docutils literal"><span class="pre">__call__</span></tt>. Default <tt class="docutils literal"><span class="pre">None</span></tt></li>
+<li><strong>ax</strong> matplotlib axes. If not given it will be drawn on current
+axes <tt class="docutils literal"><span class="pre">gca()</span></tt>.</li>
+<li><strong>parmloc</strong> location of parameter print out. This is passed
+directy to legend loc named parameter. Default (0.05,0.95).</li>
+<li><strong>nfbins</strong> how many point pdf should be evaluated. Default 200.</li>
+<li><strong>print_par</strong> print parameters and error on the plot.
+Default False.</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="probfit.costfunc.BinnedLH.show">
+<tt class="descname">show</tt><big>(</big><em>self</em>, <em>*arg</em>, <em>**kwd</em><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedLH.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same thing as <a class="reference internal" href="#probfit.costfunc.BinnedLH.draw" title="probfit.costfunc.BinnedLH.draw"><tt class="xref py py-meth docutils literal"><span class="pre">draw()</span></tt></a>. But show the figure immediately.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#probfit.costfunc.BinnedLH.draw" title="probfit.costfunc.BinnedLH.draw"><tt class="xref py py-meth docutils literal"><span class="pre">draw()</span></tt></a> for arguments.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="regression">
+<h3><span class="math">\(\chi^2\)</span> Regression<a class="headerlink" href="#regression" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="probfit.costfunc.Chi2Regression">
+<em class="property">class </em><tt class="descclassname">probfit.costfunc.</tt><tt class="descname">Chi2Regression</tt><a class="headerlink" href="#probfit.costfunc.Chi2Regression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Chi2Regression(f, x, y, error=None, weights=None)</p>
+<p>Create <span class="math">\(\chi^2\)</span> regression object. This is for fitting funciton
+to data points(x,y) rather than fitting PDF to a distribution.</p>
+<div class="math">
+\[\textrm{Chi2Regression} = \sum_{i} w_i \times \left( \frac{f(x_i, arg \ldots) - y_i}{error_i} \right)^2\]</div>
+<dl class="docutils">
+<dt><strong>Arguments</strong></dt>
+<dd><ul class="first last">
+<li><p class="first"><strong>f</strong> callable object to describe line given by (<strong>x</strong> , <strong>y</strong>).
+The first positional arugment of <strong>f</strong> is assumed to be
+independent variable. Ex::</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">gauss</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span><span class="c">#good</span>
+    <span class="k">pass</span>
+<span class="k">def</span> <span class="nf">bad_gauss</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span><span class="c">#bad</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>x</strong> 1D array of independent variable</p>
+</li>
+<li><p class="first"><strong>y</strong> 1D array of expected <strong>y</strong></p>
+</li>
+<li><p class="first"><strong>error</strong> optional 1D error array. If <tt class="docutils literal"><span class="pre">None</span></tt> is given, it&#8217;s
+assumed to be all 1&#8217;s.</p>
+</li>
+<li><p class="first"><strong>weight</strong> 1D array weight for each data point.</p>
+</li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="probfit.costfunc.Chi2Regression.__call__">
+<tt class="descname">__call__</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#probfit.costfunc.Chi2Regression.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute <span class="math">\(\chi^2\)</span></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="probfit.costfunc.Chi2Regression.draw">
+<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>ax=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>print_par=False</em><big>)</big><a class="headerlink" href="#probfit.costfunc.Chi2Regression.draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw comparison between points (<strong>x</strong>,**y**) and the function <strong>f</strong>.</p>
+<p><strong>Arguments</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>minuit</strong> Optional but recommended <tt class="docutils literal"><span class="pre">iminuit.Minuit</span></tt> object.
+If minuit is not <tt class="docutils literal"><span class="pre">None</span></tt>, the pdf will be drawn using minimum
+value from minuit and parameters and error will be shown.
+If minuit is <tt class="docutils literal"><span class="pre">None</span></tt>, then pdf will be drawn using argument from
+the last call to <tt class="docutils literal"><span class="pre">__call__</span></tt>. Default <tt class="docutils literal"><span class="pre">None</span></tt></li>
+<li><strong>ax</strong> matplotlib axes. If not given it will be drawn on current
+axes <tt class="docutils literal"><span class="pre">gca()</span></tt>.</li>
+<li><strong>parmloc</strong> location of parameter print out. This is passed
+directy to legend loc named parameter. Default (0.05,0.95).</li>
+<li><strong>print_par</strong> print parameters and error on the plot.
+Default False.</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="probfit.costfunc.Chi2Regression.show">
+<tt class="descname">show</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#probfit.costfunc.Chi2Regression.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same thing as <a class="reference internal" href="#probfit.costfunc.Chi2Regression.draw" title="probfit.costfunc.Chi2Regression.draw"><tt class="xref py py-meth docutils literal"><span class="pre">draw()</span></tt></a>. But show the figure immediately.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#probfit.costfunc.Chi2Regression.draw" title="probfit.costfunc.Chi2Regression.draw"><tt class="xref py py-meth docutils literal"><span class="pre">draw()</span></tt></a> for arguments.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="binned">
+<h3>Binned <span class="math">\(\chi^2\)</span><a class="headerlink" href="#binned" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="probfit.costfunc.BinnedChi2">
+<em class="property">class </em><tt class="descclassname">probfit.costfunc.</tt><tt class="descname">BinnedChi2</tt><a class="headerlink" href="#probfit.costfunc.BinnedChi2" title="Permalink to this definition">¶</a></dt>
+<dd><p>BinnedChi2(f, data, bins=40, weights=None, bound=None, sumw2=False)</p>
+<p>Create Binned Chi2 Object. It calculates chi^2 assuming poisson
+statistics.</p>
+<div class="math">
+\[\textrm{BinnedChi2} = \sum_{i \in \textrm{bins}} \left( \frac{h_i - f(x_i,arg \ldots) \times b_i \times N}{err_i} \right)^2\]</div>
+<p>Where <span class="math">\(err_i\)</span> is</p>
+<blockquote>
+<div><ul class="simple">
+<li><span class="math">\(\sqrt{\sum_{j \in \textrm{bin}_i} w_j}\)</span> if <tt class="docutils literal"><span class="pre">sum_w2=False</span></tt>.</li>
+<li><span class="math">\(\sqrt{\sum_{j \in \textrm{bin}_i} w_j^2}\)</span> if <tt class="docutils literal"><span class="pre">sum_w2=True</span></tt>.</li>
+</ul>
+</div></blockquote>
+<p><strong>Arguments</strong></p>
+<blockquote>
+<div><ul>
+<li><p class="first"><strong>f</strong> callable object. PDF describing <strong>data</strong>. The first
+positional arugment of <strong>f</strong> is assumed to be independent
+variable. Ex::</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">gauss</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span><span class="c">#good</span>
+    <span class="k">pass</span>
+<span class="k">def</span> <span class="nf">bad_gauss</span><span class="p">(</span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span><span class="c">#bad</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first"><strong>data</strong> 1D array data (raw not histogram)</p>
+</li>
+<li><p class="first"><strong>bins</strong> Optional number of bins to histogram data. Default 40.</p>
+</li>
+<li><p class="first"><strong>weights</strong> 1D array weights.</p>
+</li>
+<li><p class="first"><strong>bound</strong> tuple(min,max) bound of histogram. If <tt class="docutils literal"><span class="pre">None</span></tt> is given
+it&#8217;s automatically determined from the data.</p>
+</li>
+<li><p class="first"><strong>sumw2</strong> scale the error using
+<span class="math">\(\sqrt{\sum_{j \in \textrm{bin}_i} w_j^2}\)</span>.</p>
+</li>
+</ul>
+</div></blockquote>
+<dl class="method">
+<dt id="probfit.costfunc.BinnedChi2.__call__">
+<tt class="descname">__call__</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedChi2.__call__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate <span class="math">\(\chi^2\)</span> given positional arguments</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="probfit.costfunc.BinnedChi2.draw">
+<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>ax=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>nfbins=200</em>, <em>print_par=False</em><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedChi2.draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>Draw comparison histogram of data and the function <strong>f</strong>.</p>
+<p><strong>Arguments</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>minuit</strong> Optional but recommended <tt class="docutils literal"><span class="pre">iminuit.Minuit</span></tt> object.
+If minuit is not <tt class="docutils literal"><span class="pre">None</span></tt>, the pdf will be drawn using minimum
+value from minuit and parameters and error will be shown.
+If minuit is <tt class="docutils literal"><span class="pre">None</span></tt>, then pdf will be drawn using argument from
+the last call to <tt class="docutils literal"><span class="pre">__call__</span></tt>. Default <tt class="docutils literal"><span class="pre">None</span></tt></li>
+<li><strong>ax</strong> matplotlib axes. If not given it will be drawn on current
+axes <tt class="docutils literal"><span class="pre">gca()</span></tt>.</li>
+<li><strong>parmloc</strong> location of parameter print out. This is passed
+directy to legend loc named parameter. Default (0.05,0.95).</li>
+<li><strong>nfbins</strong> number of points to calculate f</li>
+<li><strong>print_par</strong> print parameters and error on the plot.
+Default False.</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<dl class="method">
+<dt id="probfit.costfunc.BinnedChi2.show">
+<tt class="descname">show</tt><big>(</big><em>self</em>, <em>*arg</em>, <em>**kwd</em><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedChi2.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same thing as <a class="reference internal" href="#probfit.costfunc.BinnedChi2.draw" title="probfit.costfunc.BinnedChi2.draw"><tt class="xref py py-meth docutils literal"><span class="pre">draw()</span></tt></a>. But show the figure immediately.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#probfit.costfunc.BinnedChi2.draw" title="probfit.costfunc.BinnedChi2.draw"><tt class="xref py py-meth docutils literal"><span class="pre">draw()</span></tt></a> for arguments.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="functor">
+<span id="id1"></span><h2>Functor<a class="headerlink" href="#functor" title="Permalink to this headline">¶</a></h2>
+<p>Manipulate and combined your pdf in various ways.</p>
+<div class="section" id="extended">
+<h3>Extended<a class="headerlink" href="#extended" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="probfit.functor.Extended">
+<em class="property">class </em><tt class="descclassname">probfit.functor.</tt><tt class="descname">Extended</tt><a class="headerlink" href="#probfit.functor.Extended" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended(f, extname=&#8217;N&#8217;)</p>
+<p>Transformed given <strong>f</strong> into extended from.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">sigma</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">gaussian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">sigma</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">Extended</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="c">#g is equivalent to N*f(x,mu,sigma)</span>
+<span class="n">describe</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="c">#(&#39;x&#39;,&#39;mu&#39;,&#39;sigma&#39;,&#39;N&#39;)</span>
+
+<span class="c">#g is equivalent to</span>
+<span class="k">def</span> <span class="nf">g_equiv</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">N</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><strong>Arguments</strong></dt>
+<dd><ul class="first last simple">
+<li><strong>f</strong> call object. PDF.</li>
+<li><strong>extname</strong> optional string. Name of the extended parameter. Default
+<cite>&#8216;N&#8217;</cite></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="normalized">
+<h3>Normalized<a class="headerlink" href="#normalized" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="probfit.functor.Normalized">
+<em class="property">class </em><tt class="descclassname">probfit.functor.</tt><tt class="descname">Normalized</tt><a class="headerlink" href="#probfit.functor.Normalized" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalized(f, bound, nint=1000, warnfloat=1)</p>
+<p>Transformed PDF in to a normalized version. The normalization factor is
+cached according the shape parameters(all arguments except the first one).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">do_something</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">Normalized</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">))</span>
+<span class="c">#g is eqivalent to (shown here without cache)</span>
+<span class="k">def</span> <span class="nf">g_equiv</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span><span class="o">/</span><span class="n">Integrate</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">1.</span><span class="p">))</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><strong>Arguments</strong></dt>
+<dd><ul class="first last simple">
+<li><strong>f</strong> function to normalized.</li>
+<li><strong>bound</strong> bound of the normalization.</li>
+<li><strong>nint</strong> optional number of pieces to integrate. Default 1000.</li>
+<li><strong>warnfloat</strong> optinal number of times it should warn if integral
+of the given function is really small. This usually indicate
+you bound doesn&#8217;t make sense with given parameters.</li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Integration implemented here is just a simple trapezoid rule.
+You are welcome to implement something better and submit a pull
+request.</p>
+</div>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p>Never reused Normalized object with different parameters in the same pdf.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#DO NOT DO THIS</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">):</span>
+    <span class="n">do_something</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+<span class="n">pdf1</span> <span class="o">=</span> <span class="n">Normalized</span><span class="p">(</span><span class="n">f</span><span class="p">,(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="c">#h has it&#39;s own cache</span>
+
+<span class="n">pdf2</span> <span class="o">=</span> <span class="n">rename</span><span class="p">(</span><span class="n">pdf1</span><span class="p">,[</span><span class="s">&#39;x&#39;</span><span class="p">,</span><span class="s">&#39;a&#39;</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">])</span><span class="c">#don&#39;t do this</span>
+
+<span class="n">totalpdf</span> <span class="o">=</span> <span class="n">Add2PdfNorm</span><span class="p">(</span><span class="n">pdf1</span><span class="p">,</span><span class="n">pdf2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The reason is that Normalized has excatly one cache value. Everytime
+it&#8217;s called with different parameters the cache is invalidate and it
+will recompute the integration which takes a long time. For the
+example given above, when calling totalpdf, calling to <cite>pdf2</cite> will
+always invalidate <cite>pdf1</cite> cache causing it to recompute integration
+for every datapoint <cite>x</cite>. The fix is easy:</p>
+<div class="last highlight-python"><div class="highlight"><pre><span class="c">#DO THIS INSTEAD</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">):</span>
+    <span class="n">do_something</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+<span class="n">pdf1</span> <span class="o">=</span> <span class="n">Normalized</span><span class="p">(</span><span class="n">f</span><span class="p">,(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="c">#h has it&#39;s own cache</span>
+
+<span class="n">pdf2_temp</span> <span class="o">=</span> <span class="n">Normalized</span><span class="p">(</span><span class="n">f</span><span class="p">,(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> <span class="c">#own separate cache</span>
+<span class="n">pdf2</span> <span class="o">=</span> <span class="n">rename</span><span class="p">(</span><span class="n">pdf2_temp</span><span class="p">,[</span><span class="s">&#39;x&#39;</span><span class="p">,</span><span class="s">&#39;a&#39;</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">])</span>
+
+<span class="n">totalpdf</span> <span class="o">=</span> <span class="n">Add2PdfNorm</span><span class="p">(</span><span class="n">pdf1</span><span class="p">,</span><span class="n">pdf2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="convolve">
+<h3>Convolve<a class="headerlink" href="#convolve" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="probfit.functor.Convolve">
+<em class="property">class </em><tt class="descclassname">probfit.functor.</tt><tt class="descname">Convolve</tt><a class="headerlink" href="#probfit.functor.Convolve" title="Permalink to this definition">¶</a></dt>
+<dd><p>Convolve(f, g, gbound, nbins=1000)</p>
+<p>Make convolution from supplied <strong>f</strong> and <strong>g</strong>
+Argument from <strong>f</strong> and <strong>g</strong> is automatically merge by name. For example,</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">c</span>
+<span class="n">g</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="n">gaussian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">sigma</span><span class="p">)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">Convolve</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">gbound</span><span class="p">)</span>
+<span class="n">describe</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="c">#[&#39;x&#39;,&#39;a&#39;,&#39;b&#39;,&#39;c&#39;,&#39;sigma&#39;]</span>
+
+<span class="c">#h is equivalent to</span>
+<span class="k">def</span> <span class="nf">h_equiv</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">sigma</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Integrate</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">t</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span><span class="o">*</span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="n">t_range</span><span class="o">=</span><span class="n">gbound</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="math">
+\[\text{Convolve(f,g)}(t, arg \ldots) =
+        \int_{\tau \in \text{gbound}}
+        f(t-\tau, arg \ldots)\times g(t, arg\ldots) \, \mathrm{d}\tau\]</div>
+<p><strong>Argument</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>f</strong> Callable object, PDF.</li>
+<li><strong>g</strong> Resolution function.</li>
+<li><strong>gbound</strong> Bound of the resolution. Supplied something such that
+g(x,*arg) is near 0 at the edges. Current implementation is
+multiply reverse slide add straight up from the definition so this
+bound is important. Overbounding is recommended.</li>
+<li><strong>nbins</strong> Number of bins in multiply reverse slide add. Default(1000)</li>
+</ul>
+</div></blockquote>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">probfit.funcutil.merge_func_code()</span></tt></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="addpdf">
+<h3>AddPdf<a class="headerlink" href="#addpdf" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="probfit.functor.AddPdf">
+<em class="property">class </em><tt class="descclassname">probfit.functor.</tt><tt class="descname">AddPdf</tt><a class="headerlink" href="#probfit.functor.AddPdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>AddPdf(prefix=None, <a href="#id2"><span class="problematic" id="id3">*</span></a>arg)</p>
+<p>Directly add PDF without normalization nor factor.
+Parmeters are merged by names.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">do_something</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">do_something_else</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="n">AddPdf</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span><span class="c"># you can do AddPdf(f, g, h)</span>
+<span class="c">#h is equivalent to</span>
+<span class="k">def</span> <span class="nf">h_equiv</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">+</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Arguments</strong></p>
+<blockquote>
+<div><ul>
+<li><p class="first"><strong>prefix</strong> array of prefix string with length equal to number of
+callable object passed. This allows you to add two PDF without having
+parameters from the two merge.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">h2</span> <span class="o">=</span> <span class="n">AddPdf</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;f&#39;</span><span class="p">,</span><span class="s">&#39;g&#39;</span><span class="p">])</span>
+<span class="c">#h is equivalent to</span>
+<span class="k">def</span> <span class="nf">h2_equiv</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f_a</span><span class="p">,</span> <span class="n">f_b</span><span class="p">,</span> <span class="n">f_c</span><span class="p">,</span> <span class="n">g_d</span><span class="p">,</span> <span class="n">g_a</span><span class="p">,</span> <span class="n">g_e</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">f_a</span><span class="p">,</span> <span class="n">f_b</span><span class="p">,</span> <span class="n">f_c</span><span class="p">)</span> <span class="o">+</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">g_d</span><span class="p">,</span> <span class="n">g_a</span><span class="p">,</span> <span class="n">g_e</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="add2pdfnorm">
+<h3>Add2PdfNorm<a class="headerlink" href="#add2pdfnorm" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="probfit.functor.Add2PdfNorm">
+<em class="property">class </em><tt class="descclassname">probfit.functor.</tt><tt class="descname">Add2PdfNorm</tt><a class="headerlink" href="#probfit.functor.Add2PdfNorm" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add2PdfNorm(f, g, facname=&#8217;k_f&#8217;)</p>
+<p>Add 2 PDF with normalization factor. Parameters are merged by name.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">do_something</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">do_something_else</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="n">Add2PdfNorm</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">g</span><span class="p">)</span>
+
+<span class="c">#h is equivalent to</span>
+<span class="k">def</span> <span class="nf">h_equiv</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">k_f</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">k_f</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span><span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">k_f</span><span class="p">)</span><span class="o">*</span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><strong>Arguments</strong></dt>
+<dd><ul class="first last simple">
+<li><strong>f</strong> callable object f.</li>
+<li><strong>g</strong> callable object g.</li>
+<li><strong>facname</strong> name of the factor</li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">You are welcome to modify this so that it adds arbitary number of
+function with correct normalization. Submit a Pull request
+if you have done it.</p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="rename">
+<h3>rename<a class="headerlink" href="#rename" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="probfit.funcutil.rename">
+<tt class="descclassname">probfit.funcutil.</tt><tt class="descname">rename</tt><big>(</big><em>f</em>, <em>newarg</em><big>)</big><a class="headerlink" href="#probfit.funcutil.rename" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rename function parameters.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">do_something</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span>
+<span class="n">g</span> <span class="o">=</span> <span class="n">rename</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">[</span><span class="s">&#39;x&#39;</span><span class="p">,</span><span class="s">&#39;a&#39;</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">])</span>
+<span class="k">print</span> <span class="n">describe</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="c"># [&#39;x&#39;,&#39;a&#39;,&#39;b&#39;]</span>
+
+<span class="c">#g is equivalent to</span>
+<span class="k">def</span> <span class="nf">g_equiv</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Arguments</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>f</strong> callable object</li>
+<li><strong>newarg</strong> list of new argument names</li>
+</ul>
+</div></blockquote>
+<p><strong>Returns</strong></p>
+<blockquote>
+<div>function with new argument.</div></blockquote>
+</dd></dl>
+
+</div>
+<div class="section" id="declarator">
+<h3>Declarator<a class="headerlink" href="#declarator" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="probfit.decorator.normalized">
+<em class="property">class </em><tt class="descclassname">probfit.decorator.</tt><tt class="descname">normalized</tt><big>(</big><em>bound</em>, <em>nint=1000</em><big>)</big><a class="headerlink" href="#probfit.decorator.normalized" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalized decorator</p>
+<dl class="docutils">
+<dt><strong>Arguments</strong></dt>
+<dd><ul class="first last simple">
+<li><strong>bound</strong> normalized bound</li>
+<li><strong>nint</strong> option number of integral pieces. Default 1000.</li>
+</ul>
+</dd>
+</dl>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#probfit.functor.Normalized" title="probfit.functor.Normalized"><tt class="xref py py-class docutils literal"><span class="pre">probfit.functor.Normalized</span></tt></a></p>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="probfit.decorator.extended">
+<em class="property">class </em><tt class="descclassname">probfit.decorator.</tt><tt class="descname">extended</tt><big>(</big><em>extname='N'</em><big>)</big><a class="headerlink" href="#probfit.decorator.extended" title="Permalink to this definition">¶</a></dt>
+<dd><p>Extended decorator</p>
+<dl class="docutils">
+<dt><strong>Arguments</strong></dt>
+<dd><ul class="first last simple">
+<li><strong>extname</strong> extended parameter name. Default &#8216;N&#8217;</li>
+</ul>
+</dd>
+</dl>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#probfit.functor.Extended" title="probfit.functor.Extended"><tt class="xref py py-class docutils literal"><span class="pre">probfit.functor.Extended</span></tt></a></p>
+</div>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="builtin-pdf">
+<span id="builtin"></span><h2>Builtin PDF<a class="headerlink" href="#builtin-pdf" title="Permalink to this headline">¶</a></h2>
+<p>Builtin PDF written in cython.</p>
+<div class="section" id="gaussian">
+<h3>gaussian<a class="headerlink" href="#gaussian" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="probfit.pdf.gaussian">
+<tt class="descclassname">probfit.pdf.</tt><tt class="descname">gaussian</tt><big>(</big><em>double x</em>, <em>double mean</em>, <em>double sigma</em><big>)</big> &rarr; double<a class="headerlink" href="#probfit.pdf.gaussian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalized gaussian.</p>
+<div class="math">
+\[f(x; mean, \sigma) = \frac{1}{\sqrt{2\pi}\sigma}
+\exp \left[  -\frac{1}{2} \left(\frac{x-mean}{\sigma}\right)^2 \right]\]</div>
+</dd></dl>
+
+</div>
+<div class="section" id="crystalball">
+<h3>crystalball<a class="headerlink" href="#crystalball" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="probfit.pdf.crystalball">
+<tt class="descclassname">probfit.pdf.</tt><tt class="descname">crystalball</tt><big>(</big><em>double x</em>, <em>double alpha</em>, <em>double n</em>, <em>double mean</em>, <em>double sigma</em><big>)</big> &rarr; double<a class="headerlink" href="#probfit.pdf.crystalball" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unnormalized crystal ball function</p>
+<div class="math">
+\[\begin{split}f(x;\alpha,n,mean,\sigma) =
+\begin{cases}
+    \exp\left( -\frac{1}{2} \delta^2 \right) &amp; \mbox{if } \delta&gt;-\alpha \\
+    \left( \frac{n}{|\alpha|} \right)^n \left( \frac{n}{|\alpha|} - |\alpha| - \delta \right)^{-n} 
+    \exp\left( -\frac{1}{2}\alpha^2\right)
+    &amp; \mbox{if } \delta \leq \alpha
+\end{cases}\end{split}\]</div>
+<dl class="docutils">
+<dt>where</dt>
+<dd><ul class="first last simple">
+<li><span class="math">\(\delta = \frac{x-mean}{\sigma}\)</span></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference external" href="http://en.wikipedia.org/wiki/Crystal_Ball_function">http://en.wikipedia.org/wiki/Crystal_Ball_function</a></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="cruijff">
+<h3>cruijff<a class="headerlink" href="#cruijff" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="probfit.pdf.cruijff">
+<tt class="descclassname">probfit.pdf.</tt><tt class="descname">cruijff</tt><big>(</big><em>double x</em>, <em>double m0</em>, <em>double sigma_L</em>, <em>double sigma_R</em>, <em>double alpha_L</em>, <em>double alpha_R</em><big>)</big> &rarr; double<a class="headerlink" href="#probfit.pdf.cruijff" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unnormalized cruijff function</p>
+<div class="math">
+\[\begin{split}f(x;m_0, \sigma_L, \sigma_R, \alpha_L, \alpha_R) =
+\begin{cases}
+    \exp\left(-\frac{(x-m_0)^2}{2(\sigma_{L}^2+\alpha_{L}(x-m_0)^2)}\right)
+    &amp; \mbox{if } x&lt;m_0 \\
+    \exp\left(-\frac{(x-m_0)^2}{2(\sigma_{R}^2+\alpha_{R}(x-m_0)^2)}\right)
+    &amp; \mbox{if } x&lt;m_0 \\
+\end{cases}\end{split}\]</div>
+</dd></dl>
+
+</div>
+<div class="section" id="doublegaussian">
+<h3>doublegaussian<a class="headerlink" href="#doublegaussian" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="probfit.pdf.doublegaussian">
+<tt class="descclassname">probfit.pdf.</tt><tt class="descname">doublegaussian</tt><big>(</big><em>double x</em>, <em>double mean</em>, <em>double sigmal</em>, <em>double sigmar</em><big>)</big> &rarr; double<a class="headerlink" href="#probfit.pdf.doublegaussian" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unnormalized double gaussian</p>
+<div class="math">
+\[\begin{split}f(x;mean,\sigma_l,\sigma_r) =
+\begin{cases}
+    \exp \left[ -\frac{1}{2} \left(\frac{x-mean}{\sigma_l}\right)^2 \right], &amp; \mbox{if } x &lt; mean \\
+    \exp \left[ -\frac{1}{2} \left( -\frac{x-mean}{\sigma_r}\right)^2 \right], &amp; \mbox{if } x &gt;= mean
+\end{cases}\end{split}\]</div>
+</dd></dl>
+
+</div>
+<div class="section" id="novosibirsk">
+<h3>novosibirsk<a class="headerlink" href="#novosibirsk" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="probfit.pdf.novosibirsk">
+<tt class="descclassname">probfit.pdf.</tt><tt class="descname">novosibirsk</tt><big>(</big><em>double x</em>, <em>double width</em>, <em>double peak</em>, <em>double tail</em><big>)</big> &rarr; double<a class="headerlink" href="#probfit.pdf.novosibirsk" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unnormalized Novosibirsk</p>
+<div class="math">
+\[\begin{split}f(x;\sigma, x_0, \Lambda) = \exp\left[
+    -\frac{1}{2} \frac{\left( \ln q_y \right)^2 }{\Lambda^2} + \Lambda^2 \right] \\
+q_y(x;\sigma,x_0,\Lambda) = 1 + \frac{\Lambda(x-x_0)}{\sigma} \times
+\frac{\sinh \left( \Lambda \sqrt{\ln 4} \right)}{\Lambda \sqrt{\ln 4}}\end{split}\]</div>
+<dl class="docutils">
+<dt>where</dt>
+<dd><ul class="first last simple">
+<li>width = <span class="math">\(\sigma\)</span></li>
+<li>peak = <span class="math">\(m_0\)</span></li>
+<li>tail = <span class="math">\(\Lambda\)</span></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="argus">
+<h3>argus<a class="headerlink" href="#argus" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="probfit.pdf.argus">
+<tt class="descclassname">probfit.pdf.</tt><tt class="descname">argus</tt><big>(</big><em>double x</em>, <em>double c</em>, <em>double chi</em>, <em>double p</em><big>)</big> &rarr; double<a class="headerlink" href="#probfit.pdf.argus" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unnormalized argus distribution</p>
+<div class="math">
+\[f(x;c,\chi,p) = \frac{x}{c^2} \left( 1-\frac{x^2}{c^2} \right)
+    \exp \left( - \frac{1}{2} \chi^2 \left( 1 - \frac{x^2}{c^2} \right) \right)\]</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><a class="reference external" href="http://en.wikipedia.org/wiki/ARGUS_distribution">http://en.wikipedia.org/wiki/ARGUS_distribution</a></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="linear">
+<h3>linear<a class="headerlink" href="#linear" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="probfit.pdf.linear">
+<tt class="descclassname">probfit.pdf.</tt><tt class="descname">linear</tt><big>(</big><em>double x</em>, <em>double m</em>, <em>double c</em><big>)</big> &rarr; double<a class="headerlink" href="#probfit.pdf.linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>Linear function.</p>
+<div class="math">
+\[f(x;m,c) = mx+c\]</div>
+</dd></dl>
+
+</div>
+<div class="section" id="poly2">
+<h3>poly2<a class="headerlink" href="#poly2" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="probfit.pdf.poly2">
+<tt class="descclassname">probfit.pdf.</tt><tt class="descname">poly2</tt><big>(</big><em>double x</em>, <em>double a</em>, <em>double b</em>, <em>double c</em><big>)</big> &rarr; double<a class="headerlink" href="#probfit.pdf.poly2" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parabola</p>
+<div class="math">
+\[f(x;a,b,c) = ax^2+bx+c\]</div>
+</dd></dl>
+
+</div>
+<div class="section" id="poly3">
+<h3>poly3<a class="headerlink" href="#poly3" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="probfit.pdf.poly3">
+<tt class="descclassname">probfit.pdf.</tt><tt class="descname">poly3</tt><big>(</big><em>double x</em>, <em>double a</em>, <em>double b</em>, <em>double c</em>, <em>double d</em><big>)</big> &rarr; double<a class="headerlink" href="#probfit.pdf.poly3" title="Permalink to this definition">¶</a></dt>
+<dd><p>Polynomial of third order</p>
+<div class="math">
+\[f(x; a,b,c,d) =ax^3+bx^2+cx+d\]</div>
+</dd></dl>
+
+</div>
+<div class="section" id="polynomial">
+<h3>Polynomial<a class="headerlink" href="#polynomial" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="probfit.pdf.Polynomial">
+<em class="property">class </em><tt class="descclassname">probfit.pdf.</tt><tt class="descname">Polynomial</tt><a class="headerlink" href="#probfit.pdf.Polynomial" title="Permalink to this definition">¶</a></dt>
+<dd><p>Polynomial(order, xname=&#8217;x&#8217;)</p>
+<div class="math">
+\[\begin{split}f(x; c_i) = \sum_{i &lt; \text{order}} c_i x^i\end{split}\]</div>
+<p>User can supply order as integer in which case it uses (c_0....c_n+1)
+default or the list of coefficient name which the first one will be the
+lowest order and the last one will be the highest order</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="useful-utility-function">
+<h2>Useful Utility Function<a class="headerlink" href="#useful-utility-function" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="vector-apply">
+<h3>vector_apply<a class="headerlink" href="#vector-apply" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="probfit.nputil.vector_apply">
+<tt class="descclassname">probfit.nputil.</tt><tt class="descname">vector_apply</tt><big>(</big><em>f</em>, <em>x</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#probfit.nputil.vector_apply" title="Permalink to this definition">¶</a></dt>
+<dd><p>apply <strong>f</strong> to array <strong>x</strong> with given arguments fast. This is a fast
+version of:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">f</span><span class="p">(</span><span class="n">xi</span><span class="p">,</span><span class="o">*</span><span class="n">arg</span><span class="p">)</span> <span class="k">for</span> <span class="n">xi</span> <span class="ow">in</span> <span class="n">x</span> <span class="p">])</span>
+</pre></div>
+</div>
+<p>useful when you try to plot something</p>
+</dd></dl>
+
+</div>
+<div class="section" id="draw-compare-hist">
+<h3>draw_compare_hist<a class="headerlink" href="#draw-compare-hist" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="probfit.plotting.draw_compare_hist">
+<tt class="descclassname">probfit.plotting.</tt><tt class="descname">draw_compare_hist</tt><big>(</big><em>f</em>, <em>arg</em>, <em>data</em>, <em>bins=100</em>, <em>bound=None</em>, <em>weights=None</em>, <em>normed=False</em>, <em>use_w2=False</em>, <em>parts=False</em><big>)</big><a class="headerlink" href="#probfit.plotting.draw_compare_hist" title="Permalink to this definition">¶</a></dt>
+<dd><p>draw histogram of data with poisson error bar and f(x,*arg).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">np</span><span class="o">.</span><span class="n">rannd</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">gaussian</span>
+<span class="n">draw_compare_hist</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;mean&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="s">&#39;sigma&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">},</span> <span class="n">data</span><span class="p">,</span> <span class="n">normed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Arguments</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>f</strong></li>
+<li><strong>arg</strong> argument pass to f. Can be dictionary or list.</li>
+<li><strong>data</strong> data array</li>
+<li><strong>bins</strong> number of bins. Default 100.</li>
+<li><strong>bound</strong> optional boundary of plot in tuple form. If <cite>None</cite> is
+given, the bound is determined from min and max of the data. Default
+<cite>None</cite></li>
+<li><strong>weights</strong> weights array. Default None.</li>
+<li><strong>normed</strong> optional normalized data flag. Default False.</li>
+<li><strong>use_w2</strong> scaled error down to the original statistics instead of
+weighted statistics.</li>
+<li><strong>parts</strong> draw parts of pdf. (Works with AddPdf and Add2PdfNorm).
+Default False.</li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Full API Documentation</a><ul>
+<li><a class="reference internal" href="#cost-function">Cost Function</a><ul>
+<li><a class="reference internal" href="#unbinned-likelihood">Unbinned Likelihood</a></li>
+<li><a class="reference internal" href="#binned-likelihood">Binned Likelihood</a></li>
+<li><a class="reference internal" href="#regression"><span class="math">\(\chi^2\)</span> Regression</a></li>
+<li><a class="reference internal" href="#binned">Binned <span class="math">\(\chi^2\)</span></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#functor">Functor</a><ul>
+<li><a class="reference internal" href="#extended">Extended</a></li>
+<li><a class="reference internal" href="#normalized">Normalized</a></li>
+<li><a class="reference internal" href="#convolve">Convolve</a></li>
+<li><a class="reference internal" href="#addpdf">AddPdf</a></li>
+<li><a class="reference internal" href="#add2pdfnorm">Add2PdfNorm</a></li>
+<li><a class="reference internal" href="#rename">rename</a></li>
+<li><a class="reference internal" href="#declarator">Declarator</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#builtin-pdf">Builtin PDF</a><ul>
+<li><a class="reference internal" href="#gaussian">gaussian</a></li>
+<li><a class="reference internal" href="#crystalball">crystalball</a></li>
+<li><a class="reference internal" href="#cruijff">cruijff</a></li>
+<li><a class="reference internal" href="#doublegaussian">doublegaussian</a></li>
+<li><a class="reference internal" href="#novosibirsk">novosibirsk</a></li>
+<li><a class="reference internal" href="#argus">argus</a></li>
+<li><a class="reference internal" href="#linear">linear</a></li>
+<li><a class="reference internal" href="#poly2">poly2</a></li>
+<li><a class="reference internal" href="#poly3">poly3</a></li>
+<li><a class="reference internal" href="#polynomial">Polynomial</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#useful-utility-function">Useful Utility Function</a><ul>
+<li><a class="reference internal" href="#vector-apply">vector_apply</a></li>
+<li><a class="reference internal" href="#draw-compare-hist">draw_compare_hist</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to probfit&#8217;s documentation!</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/api.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to probfit’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">probfit 1.0.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2012, Piti Ongmongkolkul.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

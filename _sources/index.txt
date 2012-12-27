@@ -1,20 +1,108 @@
-.. dist_fit documentation master file, created by
-   sphinx-quickstart on Sat Nov 10 11:16:37 2012.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-Welcome to dist_fit's documentation!
+Welcome to probfit's documentation!
 ====================================
 
+.. toctree::
+   :maxdepth: 2
+   :hidden:
+
+   api
+
+Introduction
+------------
+
+*probfit* is a set of functions that helps you construct a complex fit. It's
+intended to be used with `iminuit <http://iminuit.github.com/iminuit/>`_. The
+tool includes Binned/Unbinned Likelihood estimator, :math:`\chi^2` regression,
+Binned:math:`\chi^2` estimator and Simultaneous fit estimator. Normalization and
+Convolution with cache are also included. Various builtin function that's
+normally used in B physics is also provided.
+
+Download & Install
+------------------
+
+From pip::
+
+    pip install probfit
+
+or get the latest development from github::
+
+    git clone git://github.com/iminuit/probfit.git
+
 Tutorial
-^^^^^^^^
-See :download:`Tutorial <tutorial.html>`. The ipython notebook can be also found in tutorial/tutorial.ipynb in the pacakge
+--------
 
-API
-^^^
-Sorry no real documentation yet.
+Tutorial is in the tutorial directory. You can `view it online <http://nbviewer.ipython.org/urls/raw.github.com/piti118/probfit/master/tutorial/tutorial.ipynb>`_ too.
 
 
-.. automodule:: dist_fit
-    :members:
-    :undoc-members:
+Commonly used API
+-----------------
+
+.. currentmodule:: probfit
+
+Refer to :ref:`fullapi` for complete reference.
+
+Cost Functions.
+"""""""""""""""
+
+Refer to :ref:`costfunc`.
+
+.. currentmodule:: probfit.costfunc
+
+.. autosummary::
+    UnbinnedLH
+    BinnedLH
+    Chi2Regression
+    BinnedChi2
+
+Functors
+""""""""
+
+Refer to :ref:`functor`
+
+.. currentmodule:: probfit.functor
+
+.. autosummary::
+    Normalized
+    Extended
+    Convolve
+    AddPdf
+    Add2PdfNorm
+    ~probfit.funcutil.rename
+
+And corresponding decorator
+
+.. currentmodule:: probfit.decorator
+
+.. autosummary::
+    normalized
+    extended
+
+Builtin Functions
+"""""""""""""""""
+
+Refer to :ref:`builtin`. This list can grow: implement your favorite function
+and send us pull request.
+
+.. currentmodule:: probfit.pdf
+
+.. autosummary::
+    gaussian
+    crystalball
+    cruijff
+    doublegaussian
+    argus
+    linear
+    poly2
+    poly3
+    novosibirsk
+
+
+Useful utility
+""""""""""""""
+
+You may find these functions useful in interactive environment.
+
+.. autosummary::
+    ~probfit.nputil.vector_apply
+    ~probfit.plotting.draw_compare_hist
+

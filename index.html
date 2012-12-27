@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to dist_fit’s documentation! &mdash; dist_fit 0.1 documentation</title>
+    <title>Welcome to probfit’s documentation! &mdash; probfit 1.0.0 documentation</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.1',
+        VERSION:     '1.0.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,8 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="dist_fit 0.1 documentation" href="#" /> 
+    <link rel="top" title="probfit 1.0.0 documentation" href="#" />
+    <link rel="next" title="Full API Documentation" href="api.html" /> 
   </head>
   <body>
     <div class="related">
@@ -35,9 +36,9 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li><a href="#">dist_fit 0.1 documentation</a> &raquo;</li> 
+          <a href="api.html" title="Full API Documentation"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">probfit 1.0.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -46,874 +47,162 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="welcome-to-dist-fit-s-documentation">
-<h1>Welcome to dist_fit&#8217;s documentation!<a class="headerlink" href="#welcome-to-dist-fit-s-documentation" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="welcome-to-probfit-s-documentation">
+<h1>Welcome to probfit&#8217;s documentation!<a class="headerlink" href="#welcome-to-probfit-s-documentation" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p><em>probfit</em> is a set of functions that helps you construct a complex fit. It&#8217;s
+intended to be used with <a class="reference external" href="http://iminuit.github.com/iminuit/">iminuit</a>. The
+tool includes Binned/Unbinned Likelihood estimator, <span class="math">\(\chi^2\)</span> regression,
+Binned:math:<cite>chi^2</cite> estimator and Simultaneous fit estimator. Normalization and
+Convolution with cache are also included. Various builtin function that&#8217;s
+normally used in B physics is also provided.</p>
+</div>
+<div class="section" id="download-install">
+<h2>Download &amp; Install<a class="headerlink" href="#download-install" title="Permalink to this headline">¶</a></h2>
+<p>From pip:</p>
+<div class="highlight-python"><pre>pip install probfit</pre>
+</div>
+<p>or get the latest development from github:</p>
+<div class="highlight-python"><pre>git clone git://github.com/iminuit/probfit.git</pre>
+</div>
+</div>
 <div class="section" id="tutorial">
 <h2>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h2>
-<p>See <a class="reference download internal" href="_downloads/tutorial.html"><tt class="xref download docutils literal"><span class="pre">Tutorial</span></tt></a>. The ipython notebook can be also found in tutorial/tutorial.ipynb in the pacakge</p>
+<p>Tutorial is in the tutorial directory. You can <a class="reference external" href="http://nbviewer.ipython.org/urls/raw.github.com/piti118/probfit/master/tutorial/tutorial.ipynb">view it online</a> too.</p>
 </div>
-<div class="section" id="api">
-<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
-<p>Sorry no real documentation yet.</p>
-<span class="target" id="module-dist_fit"></span><dl class="class">
-<dt id="dist_fit.Add2PdfNorm">
-<em class="property">class </em><tt class="descclassname">dist_fit.</tt><tt class="descname">Add2PdfNorm</tt><a class="headerlink" href="#dist_fit.Add2PdfNorm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add2PdfNorm(f, g, facname=&#8217;k_f&#8217;)</p>
-<dl class="method">
-<dt id="dist_fit.Add2PdfNorm.eval_parts">
-<tt class="descname">eval_parts</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#dist_fit.Add2PdfNorm.eval_parts" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.Add2PdfNorm.func_code">
-<tt class="descname">func_code</tt><a class="headerlink" href="#dist_fit.Add2PdfNorm.func_code" title="Permalink to this definition">¶</a></dt>
-<dd><p>func_code: object</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.Add2PdfNorm.func_defaults">
-<tt class="descname">func_defaults</tt><a class="headerlink" href="#dist_fit.Add2PdfNorm.func_defaults" title="Permalink to this definition">¶</a></dt>
-<dd><p>func_defaults: object</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.Add2PdfNorm.nparts">
-<tt class="descname">nparts</tt><a class="headerlink" href="#dist_fit.Add2PdfNorm.nparts" title="Permalink to this definition">¶</a></dt>
-<dd><p>nparts: &#8216;int&#8217;</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="dist_fit.AddPdf">
-<em class="property">class </em><tt class="descclassname">dist_fit.</tt><tt class="descname">AddPdf</tt><a class="headerlink" href="#dist_fit.AddPdf" title="Permalink to this definition">¶</a></dt>
-<dd><p>AddPdf(prefix=None, <a href="#id1"><span class="problematic" id="id2">*</span></a>arg)</p>
-<dl class="method">
-<dt id="dist_fit.AddPdf.eval_parts">
-<tt class="descname">eval_parts</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#dist_fit.AddPdf.eval_parts" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.AddPdf.func_code">
-<tt class="descname">func_code</tt><a class="headerlink" href="#dist_fit.AddPdf.func_code" title="Permalink to this definition">¶</a></dt>
-<dd><p>func_code: object</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.AddPdf.func_defaults">
-<tt class="descname">func_defaults</tt><a class="headerlink" href="#dist_fit.AddPdf.func_defaults" title="Permalink to this definition">¶</a></dt>
-<dd><p>func_defaults: object</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.AddPdf.hit">
-<tt class="descname">hit</tt><a class="headerlink" href="#dist_fit.AddPdf.hit" title="Permalink to this definition">¶</a></dt>
-<dd><p>hit: &#8216;int&#8217;</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.AddPdf.nparts">
-<tt class="descname">nparts</tt><a class="headerlink" href="#dist_fit.AddPdf.nparts" title="Permalink to this definition">¶</a></dt>
-<dd><p>nparts: &#8216;int&#8217;</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="dist_fit.BinnedChi2">
-<em class="property">class </em><tt class="descclassname">dist_fit.</tt><tt class="descname">BinnedChi2</tt><a class="headerlink" href="#dist_fit.BinnedChi2" title="Permalink to this definition">¶</a></dt>
-<dd><p>BinnedChi2(f, data, bins=40, weights=None, range=None, sumw2=False, badvalue=1000000)</p>
-<dl class="method">
-<dt id="dist_fit.BinnedChi2.draw">
-<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>fbins=1000</em>, <em>ax=None</em>, <em>print_par=False</em><big>)</big><a class="headerlink" href="#dist_fit.BinnedChi2.draw" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.BinnedChi2.f">
-<tt class="descname">f</tt><a class="headerlink" href="#dist_fit.BinnedChi2.f" title="Permalink to this definition">¶</a></dt>
-<dd><p>f: object</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.BinnedChi2.func_code">
-<tt class="descname">func_code</tt><a class="headerlink" href="#dist_fit.BinnedChi2.func_code" title="Permalink to this definition">¶</a></dt>
-<dd><p>func_code: object</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.BinnedChi2.show">
-<tt class="descname">show</tt><big>(</big><em>self</em>, <em>*arg</em>, <em>**kwd</em><big>)</big><a class="headerlink" href="#dist_fit.BinnedChi2.show" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.BinnedChi2.vf">
-<tt class="descname">vf</tt><a class="headerlink" href="#dist_fit.BinnedChi2.vf" title="Permalink to this definition">¶</a></dt>
-<dd><p>vf: object</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="dist_fit.BinnedLH">
-<em class="property">class </em><tt class="descclassname">dist_fit.</tt><tt class="descname">BinnedLH</tt><a class="headerlink" href="#dist_fit.BinnedLH" title="Permalink to this definition">¶</a></dt>
-<dd><p>BinnedLH(f, data, bins=40, weights=None, range=None, badvalue=1000000, extended=False, use_w2=False, use_normw=False)</p>
-<dl class="method">
-<dt id="dist_fit.BinnedLH.draw">
-<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>fbins=1000</em>, <em>ax=None</em>, <em>print_par=False</em><big>)</big><a class="headerlink" href="#dist_fit.BinnedLH.draw" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.BinnedLH.f">
-<tt class="descname">f</tt><a class="headerlink" href="#dist_fit.BinnedLH.f" title="Permalink to this definition">¶</a></dt>
-<dd><p>f: object</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.BinnedLH.func_code">
-<tt class="descname">func_code</tt><a class="headerlink" href="#dist_fit.BinnedLH.func_code" title="Permalink to this definition">¶</a></dt>
-<dd><p>func_code: object</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.BinnedLH.show">
-<tt class="descname">show</tt><big>(</big><em>self</em>, <em>*arg</em>, <em>**kwd</em><big>)</big><a class="headerlink" href="#dist_fit.BinnedLH.show" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.BinnedLH.vf">
-<tt class="descname">vf</tt><a class="headerlink" href="#dist_fit.BinnedLH.vf" title="Permalink to this definition">¶</a></dt>
-<dd><p>vf: object</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="dist_fit.Chi2Regression">
-<em class="property">class </em><tt class="descclassname">dist_fit.</tt><tt class="descname">Chi2Regression</tt><a class="headerlink" href="#dist_fit.Chi2Regression" title="Permalink to this definition">¶</a></dt>
-<dd><p>Chi2Regression(f, x, y, error=None, weights=None, badvalue=1000000)</p>
-<dl class="method">
-<dt id="dist_fit.Chi2Regression.draw">
-<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>print_par=False</em><big>)</big><a class="headerlink" href="#dist_fit.Chi2Regression.draw" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.Chi2Regression.f">
-<tt class="descname">f</tt><a class="headerlink" href="#dist_fit.Chi2Regression.f" title="Permalink to this definition">¶</a></dt>
-<dd><p>f: object</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.Chi2Regression.func_code">
-<tt class="descname">func_code</tt><a class="headerlink" href="#dist_fit.Chi2Regression.func_code" title="Permalink to this definition">¶</a></dt>
-<dd><p>func_code: object</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Chi2Regression.show">
-<tt class="descname">show</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#dist_fit.Chi2Regression.show" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="dist_fit.Convolve">
-<em class="property">class </em><tt class="descclassname">dist_fit.</tt><tt class="descname">Convolve</tt><a class="headerlink" href="#dist_fit.Convolve" title="Permalink to this definition">¶</a></dt>
-<dd><p>Convolve(f, g, gbound, nbins=1000)</p>
-<p>Convolve)</p>
-<dl class="attribute">
-<dt id="dist_fit.Convolve.func_code">
-<tt class="descname">func_code</tt><a class="headerlink" href="#dist_fit.Convolve.func_code" title="Permalink to this definition">¶</a></dt>
-<dd><p>func_code: object</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.Convolve.func_defaults">
-<tt class="descname">func_defaults</tt><a class="headerlink" href="#dist_fit.Convolve.func_defaults" title="Permalink to this definition">¶</a></dt>
-<dd><p>func_defaults: object</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Convolve.set_gbound">
-<tt class="descname">set_gbound</tt><big>(</big><em>self</em>, <em>gbound</em>, <em>nbins</em><big>)</big><a class="headerlink" href="#dist_fit.Convolve.set_gbound" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="dist_fit.Extend">
-<em class="property">class </em><tt class="descclassname">dist_fit.</tt><tt class="descname">Extend</tt><a class="headerlink" href="#dist_fit.Extend" title="Permalink to this definition">¶</a></dt>
-<dd><p>Extend(f, extname=&#8217;N&#8217;)</p>
-<p>f = lambda x,y: x+y
-g = Extend(f) ==&gt; g = lambda x,y,N: f(x,y)*N</p>
-<dl class="attribute">
-<dt id="dist_fit.Extend.func_code">
-<tt class="descname">func_code</tt><a class="headerlink" href="#dist_fit.Extend.func_code" title="Permalink to this definition">¶</a></dt>
-<dd><p>func_code: object</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.Extend.func_defaults">
-<tt class="descname">func_defaults</tt><a class="headerlink" href="#dist_fit.Extend.func_defaults" title="Permalink to this definition">¶</a></dt>
-<dd><p>func_defaults: object</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="dist_fit.FakeFunc">
-<em class="property">class </em><tt class="descclassname">dist_fit.</tt><tt class="descname">FakeFunc</tt><a class="headerlink" href="#dist_fit.FakeFunc" title="Permalink to this definition">¶</a></dt>
-<dd><p>FakeFunc(f, prmt=None)</p>
-<dl class="attribute">
-<dt id="dist_fit.FakeFunc.func_code">
-<tt class="descname">func_code</tt><a class="headerlink" href="#dist_fit.FakeFunc.func_code" title="Permalink to this definition">¶</a></dt>
-<dd><p>func_code: object</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.FakeFunc.func_defaults">
-<tt class="descname">func_defaults</tt><a class="headerlink" href="#dist_fit.FakeFunc.func_defaults" title="Permalink to this definition">¶</a></dt>
-<dd><p>func_defaults: object</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="dist_fit.FakeFuncCode">
-<em class="property">class </em><tt class="descclassname">dist_fit.</tt><tt class="descname">FakeFuncCode</tt><a class="headerlink" href="#dist_fit.FakeFuncCode" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="class">
-<dt id="dist_fit.MinimalFuncCode">
-<em class="property">class </em><tt class="descclassname">dist_fit.</tt><tt class="descname">MinimalFuncCode</tt><a class="headerlink" href="#dist_fit.MinimalFuncCode" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="dist_fit.MinimalFuncCode.append">
-<tt class="descname">append</tt><big>(</big><em>self</em>, <em>varname</em><big>)</big><a class="headerlink" href="#dist_fit.MinimalFuncCode.append" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="dist_fit.Minuit">
-<em class="property">class </em><tt class="descclassname">dist_fit.</tt><tt class="descname">Minuit</tt><big>(</big><em>f</em>, <em>f_verbose=False</em>, <em>printlevel=0</em>, <em>pedantic=True</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#dist_fit.Minuit" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
-<dt id="dist_fit.Minuit.command">
-<tt class="descname">command</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#dist_fit.Minuit.command" title="Permalink to this definition">¶</a></dt>
-<dd><p>execute a command</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.error_matrix">
-<tt class="descname">error_matrix</tt><big>(</big><em>correlation=False</em><big>)</big><a class="headerlink" href="#dist_fit.Minuit.error_matrix" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.fix_param">
-<tt class="descname">fix_param</tt><big>(</big><big>)</big><a class="headerlink" href="#dist_fit.Minuit.fix_param" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.fmin">
-<tt class="descname">fmin</tt><big>(</big><big>)</big><a class="headerlink" href="#dist_fit.Minuit.fmin" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.help">
-<tt class="descname">help</tt><big>(</big><em>cmd</em><big>)</big><a class="headerlink" href="#dist_fit.Minuit.help" title="Permalink to this definition">¶</a></dt>
-<dd><p>print out help</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.hesse">
-<tt class="descname">hesse</tt><big>(</big><big>)</big><a class="headerlink" href="#dist_fit.Minuit.hesse" title="Permalink to this definition">¶</a></dt>
-<dd><p>run hesse</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.html_error_matrix">
-<tt class="descname">html_error_matrix</tt><big>(</big><big>)</big><a class="headerlink" href="#dist_fit.Minuit.html_error_matrix" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.html_results">
-<tt class="descname">html_results</tt><big>(</big><big>)</big><a class="headerlink" href="#dist_fit.Minuit.html_results" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.list_of_fixed_param">
-<tt class="descname">list_of_fixed_param</tt><big>(</big><big>)</big><a class="headerlink" href="#dist_fit.Minuit.list_of_fixed_param" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.list_of_vary_param">
-<tt class="descname">list_of_vary_param</tt><big>(</big><big>)</big><a class="headerlink" href="#dist_fit.Minuit.list_of_vary_param" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.matrix_accurate">
-<tt class="descname">matrix_accurate</tt><big>(</big><big>)</big><a class="headerlink" href="#dist_fit.Minuit.matrix_accurate" title="Permalink to this definition">¶</a></dt>
-<dd><p>check whether error matrix is accurate</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.migrad">
-<tt class="descname">migrad</tt><big>(</big><big>)</big><a class="headerlink" href="#dist_fit.Minuit.migrad" title="Permalink to this definition">¶</a></dt>
-<dd><p>run migrad
-user can check if the return status is not 0</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.migrad_ok">
-<tt class="descname">migrad_ok</tt><big>(</big><big>)</big><a class="headerlink" href="#dist_fit.Minuit.migrad_ok" title="Permalink to this definition">¶</a></dt>
-<dd><p>check whether last migrad call result is OK</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.minos">
-<tt class="descname">minos</tt><big>(</big><em>varname=None</em><big>)</big><a class="headerlink" href="#dist_fit.Minuit.minos" title="Permalink to this definition">¶</a></dt>
-<dd><p>run minos</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.minos_errors">
-<tt class="descname">minos_errors</tt><big>(</big><big>)</big><a class="headerlink" href="#dist_fit.Minuit.minos_errors" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.mnmatu">
-<tt class="descname">mnmatu</tt><big>(</big><big>)</big><a class="headerlink" href="#dist_fit.Minuit.mnmatu" title="Permalink to this definition">¶</a></dt>
-<dd><p>print correlation coefficient</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.mnstat">
-<tt class="descname">mnstat</tt><big>(</big><big>)</big><a class="headerlink" href="#dist_fit.Minuit.mnstat" title="Permalink to this definition">¶</a></dt>
-<dd><p>return named tuple of fmin,fedm,errdef,npari,nparx,istat</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.pedantic">
-<tt class="descname">pedantic</tt><big>(</big><em>kwds</em><big>)</big><a class="headerlink" href="#dist_fit.Minuit.pedantic" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.prepare">
-<tt class="descname">prepare</tt><big>(</big><em>**kwds</em><big>)</big><a class="headerlink" href="#dist_fit.Minuit.prepare" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.prepare_fix_params">
-<tt class="descname">prepare_fix_params</tt><big>(</big><big>)</big><a class="headerlink" href="#dist_fit.Minuit.prepare_fix_params" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.release_all_params">
-<tt class="descname">release_all_params</tt><big>(</big><big>)</big><a class="headerlink" href="#dist_fit.Minuit.release_all_params" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.set_ave">
-<tt class="descname">set_ave</tt><big>(</big><big>)</big><a class="headerlink" href="#dist_fit.Minuit.set_ave" title="Permalink to this definition">¶</a></dt>
-<dd><p>set args values and errors</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.set_printlevel">
-<tt class="descname">set_printlevel</tt><big>(</big><em>lvl</em><big>)</big><a class="headerlink" href="#dist_fit.Minuit.set_printlevel" title="Permalink to this definition">¶</a></dt>
-<dd><p>set printlevel -1 quiet, 0 normal, 1 verbose</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.set_strategy">
-<tt class="descname">set_strategy</tt><big>(</big><em>strategy</em><big>)</big><a class="headerlink" href="#dist_fit.Minuit.set_strategy" title="Permalink to this definition">¶</a></dt>
-<dd><p>set strategy</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.Minuit.set_up">
-<tt class="descname">set_up</tt><big>(</big><em>up</em><big>)</big><a class="headerlink" href="#dist_fit.Minuit.set_up" title="Permalink to this definition">¶</a></dt>
-<dd><p>set UP parameter 1 for chi^2 and 0.5 for log likelihood</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="dist_fit.Normalize">
-<em class="property">class </em><tt class="descclassname">dist_fit.</tt><tt class="descname">Normalize</tt><a class="headerlink" href="#dist_fit.Normalize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Normalize(f, bound, prmt=None, nint=1000, warnfloat=1)</p>
-<dl class="attribute">
-<dt id="dist_fit.Normalize.func_code">
-<tt class="descname">func_code</tt><a class="headerlink" href="#dist_fit.Normalize.func_code" title="Permalink to this definition">¶</a></dt>
-<dd><p>func_code: object</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.Normalize.func_defaults">
-<tt class="descname">func_defaults</tt><a class="headerlink" href="#dist_fit.Normalize.func_defaults" title="Permalink to this definition">¶</a></dt>
-<dd><p>func_defaults: object</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.Normalize.hit">
-<tt class="descname">hit</tt><a class="headerlink" href="#dist_fit.Normalize.hit" title="Permalink to this definition">¶</a></dt>
-<dd><p>hit: &#8216;int&#8217;</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="dist_fit.Polynomial">
-<em class="property">class </em><tt class="descclassname">dist_fit.</tt><tt class="descname">Polynomial</tt><a class="headerlink" href="#dist_fit.Polynomial" title="Permalink to this definition">¶</a></dt>
-<dd><p>Polynomial(order, xname=&#8217;x&#8217;)</p>
-<dl class="attribute">
-<dt id="dist_fit.Polynomial.func_code">
-<tt class="descname">func_code</tt><a class="headerlink" href="#dist_fit.Polynomial.func_code" title="Permalink to this definition">¶</a></dt>
-<dd><p>func_code: object</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.Polynomial.func_defaults">
-<tt class="descname">func_defaults</tt><a class="headerlink" href="#dist_fit.Polynomial.func_defaults" title="Permalink to this definition">¶</a></dt>
-<dd><p>func_defaults: object</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="class">
-<dt id="dist_fit.UnbinnedML">
-<em class="property">class </em><tt class="descclassname">dist_fit.</tt><tt class="descname">UnbinnedML</tt><a class="headerlink" href="#dist_fit.UnbinnedML" title="Permalink to this definition">¶</a></dt>
-<dd><p>UnbinnedML(f, data, weights=None, badvalue=-100000)</p>
-<dl class="method">
-<dt id="dist_fit.UnbinnedML.draw">
-<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>bins=100</em>, <em>ax=None</em>, <em>range=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>nfbins=500</em>, <em>print_par=False</em><big>)</big><a class="headerlink" href="#dist_fit.UnbinnedML.draw" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.UnbinnedML.f">
-<tt class="descname">f</tt><a class="headerlink" href="#dist_fit.UnbinnedML.f" title="Permalink to this definition">¶</a></dt>
-<dd><p>f: object</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.UnbinnedML.func_code">
-<tt class="descname">func_code</tt><a class="headerlink" href="#dist_fit.UnbinnedML.func_code" title="Permalink to this definition">¶</a></dt>
-<dd><p>func_code: object</p>
-</dd></dl>
-
-<dl class="method">
-<dt id="dist_fit.UnbinnedML.show">
-<tt class="descname">show</tt><big>(</big><em>self</em>, <em>*arg</em>, <em>**kwd</em><big>)</big><a class="headerlink" href="#dist_fit.UnbinnedML.show" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-</dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.adjusted_bound">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">adjusted_bound</tt><big>(</big><em>bound</em>, <em>bw</em><big>)</big><a class="headerlink" href="#dist_fit.adjusted_bound" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.argus">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">argus</tt><a class="headerlink" href="#dist_fit.argus" title="Permalink to this definition">¶</a></dt>
-<dd><p>argus(double x, double c, double chi, double p)</p>
-<p>unnormalized argus distribution
-see: <a class="reference external" href="http://en.wikipedia.org/wiki/ARGUS_distribution">http://en.wikipedia.org/wiki/ARGUS_distribution</a></p>
-</dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.better_arg_spec">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">better_arg_spec</tt><big>(</big><em>f</em><big>)</big><a class="headerlink" href="#dist_fit.better_arg_spec" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<div class="section" id="commonly-used-api">
+<h2>Commonly used API<a class="headerlink" href="#commonly-used-api" title="Permalink to this headline">¶</a></h2>
+<p>Refer to <a class="reference internal" href="api.html#fullapi"><em>Full API Documentation</em></a> for complete reference.</p>
+<div class="section" id="cost-functions">
+<h3>Cost Functions.<a class="headerlink" href="#cost-functions" title="Permalink to this headline">¶</a></h3>
+<p>Refer to <a class="reference internal" href="api.html#costfunc"><em>Cost Function</em></a>.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>f</strong> &#8211; </td>
+<tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.costfunc.UnbinnedLH" title="probfit.costfunc.UnbinnedLH"><tt class="xref py py-obj docutils literal"><span class="pre">UnbinnedLH</span></tt></a></td>
+<td>UnbinnedLH(f, data, weights=None, badvalue=-100000)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api.html#probfit.costfunc.BinnedLH" title="probfit.costfunc.BinnedLH"><tt class="xref py py-obj docutils literal"><span class="pre">BinnedLH</span></tt></a></td>
+<td>BinnedLH(f, data, bins=40, weights=None, bound=None, badvalue=1000000, extended=False, use_w2=False)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.costfunc.Chi2Regression" title="probfit.costfunc.Chi2Regression"><tt class="xref py py-obj docutils literal"><span class="pre">Chi2Regression</span></tt></a></td>
+<td>Chi2Regression(f, x, y, error=None, weights=None)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api.html#probfit.costfunc.BinnedChi2" title="probfit.costfunc.BinnedChi2"><tt class="xref py py-obj docutils literal"><span class="pre">BinnedChi2</span></tt></a></td>
+<td>BinnedChi2(f, data, bins=40, weights=None, bound=None, sumw2=False)</td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.compute_cdf">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">compute_cdf</tt><big>(</big><em>ndarray pdf</em>, <em>ndarray x</em><big>)</big><a class="headerlink" href="#dist_fit.compute_cdf" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.construct_arg">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">construct_arg</tt><big>(</big><em>tuple arg</em>, <em>ndarray fpos</em><big>)</big><a class="headerlink" href="#dist_fit.construct_arg" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.cruijff">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">cruijff</tt><a class="headerlink" href="#dist_fit.cruijff" title="Permalink to this definition">¶</a></dt>
-<dd><p>cruijff(double x, double m0, double sigma_L, double sigma_R, double alpha_L, double alpha_R)</p>
-<p>unnormalized cruijff function</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.crystalball">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">crystalball</tt><a class="headerlink" href="#dist_fit.crystalball" title="Permalink to this definition">¶</a></dt>
-<dd><p>crystalball(double x, double alpha, double n, double mean, double sigma)</p>
-<p>unnormalized crystal ball function 
-see <a class="reference external" href="http://en.wikipedia.org/wiki/Crystal_Ball_function">http://en.wikipedia.org/wiki/Crystal_Ball_function</a></p>
-</dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.describe">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">describe</tt><big>(</big><em>f</em><big>)</big><a class="headerlink" href="#dist_fit.describe" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+</div>
+<div class="section" id="functors">
+<h3>Functors<a class="headerlink" href="#functors" title="Permalink to this headline">¶</a></h3>
+<p>Refer to <a class="reference internal" href="api.html#functor"><em>Functor</em></a></p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>f</strong> &#8211; </td>
+<tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.functor.Normalized" title="probfit.functor.Normalized"><tt class="xref py py-obj docutils literal"><span class="pre">Normalized</span></tt></a></td>
+<td>Normalized(f, bound, nint=1000, warnfloat=1)</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+<tr class="row-even"><td><a class="reference internal" href="api.html#probfit.functor.Extended" title="probfit.functor.Extended"><tt class="xref py py-obj docutils literal"><span class="pre">Extended</span></tt></a></td>
+<td>Extended(f, extname=&#8217;N&#8217;)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.functor.Convolve" title="probfit.functor.Convolve"><tt class="xref py py-obj docutils literal"><span class="pre">Convolve</span></tt></a></td>
+<td>Convolve(f, g, gbound, nbins=1000)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api.html#probfit.functor.AddPdf" title="probfit.functor.AddPdf"><tt class="xref py py-obj docutils literal"><span class="pre">AddPdf</span></tt></a></td>
+<td>AddPdf(prefix=None, <a href="#id1"><span class="problematic" id="id2">*</span></a>arg)</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.functor.Add2PdfNorm" title="probfit.functor.Add2PdfNorm"><tt class="xref py py-obj docutils literal"><span class="pre">Add2PdfNorm</span></tt></a></td>
+<td>Add2PdfNorm(f, g, facname=&#8217;k_f&#8217;)</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api.html#probfit.funcutil.rename" title="probfit.funcutil.rename"><tt class="xref py py-obj docutils literal"><span class="pre">rename</span></tt></a>(f,&nbsp;newarg)</td>
+<td>Rename function parameters.</td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.doublegaussian">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">doublegaussian</tt><a class="headerlink" href="#dist_fit.doublegaussian" title="Permalink to this definition">¶</a></dt>
-<dd><p>doublegaussian(double x, double mean, double sigmal, double sigmar)</p>
-<p>unnormed gaussian normalized</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.draw_compare">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">draw_compare</tt><big>(</big><em>f</em>, <em>arg</em>, <em>edges</em>, <em>data</em>, <em>errors=None</em>, <em>normed=False</em>, <em>parts=False</em><big>)</big><a class="headerlink" href="#dist_fit.draw_compare" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.draw_compare_fit_statistics">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">draw_compare_fit_statistics</tt><big>(</big><em>lh</em>, <em>m</em><big>)</big><a class="headerlink" href="#dist_fit.draw_compare_fit_statistics" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.draw_compare_hist">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">draw_compare_hist</tt><big>(</big><em>f</em>, <em>arg</em>, <em>data</em>, <em>bins=100</em>, <em>bound=None</em>, <em>weights=None</em>, <em>normed=False</em>, <em>use_w2=False</em>, <em>parts=False</em><big>)</big><a class="headerlink" href="#dist_fit.draw_compare_hist" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.draw_contour">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">draw_contour</tt><big>(</big><em>fit</em>, <em>m</em>, <em>var</em>, <em>bound=None</em>, <em>step=None</em>, <em>lh=True</em><big>)</big><a class="headerlink" href="#dist_fit.draw_contour" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.draw_contour2d">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">draw_contour2d</tt><big>(</big><em>fit</em>, <em>m</em>, <em>var1</em>, <em>var2</em>, <em>bins=12</em>, <em>bound1=None</em>, <em>bound2=None</em>, <em>lh=True</em><big>)</big><a class="headerlink" href="#dist_fit.draw_contour2d" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.draw_pdf">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">draw_pdf</tt><big>(</big><em>f</em>, <em>arg</em>, <em>bound</em>, <em>bins</em>, <em>scale=1.0</em>, <em>normed=True</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#dist_fit.draw_pdf" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.draw_pdf_with_edges">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">draw_pdf_with_edges</tt><big>(</big><em>f</em>, <em>arg</em>, <em>edges</em>, <em>scale=1.0</em>, <em>normed=True</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#dist_fit.draw_pdf_with_edges" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.extended">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">extended</tt><big>(</big><em>f</em><big>)</big><a class="headerlink" href="#dist_fit.extended" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+<p>And corresponding decorator</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>f</strong> &#8211; </td>
+<tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.decorator.normalized" title="probfit.decorator.normalized"><tt class="xref py py-obj docutils literal"><span class="pre">normalized</span></tt></a>(bound[,&nbsp;nint])</td>
+<td>Normalized decorator</td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
+<tr class="row-even"><td><a class="reference internal" href="api.html#probfit.decorator.extended" title="probfit.decorator.extended"><tt class="xref py py-obj docutils literal"><span class="pre">extended</span></tt></a>([extname])</td>
+<td>Extended decorator</td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.fast_tuple_equal">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">fast_tuple_equal</tt><big>(</big><em>tuple t1</em>, <em>tuple t2</em>, <em>int t2_offset</em><big>)</big> &rarr; int<a class="headerlink" href="#dist_fit.fast_tuple_equal" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.fit_binlh">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">fit_binlh</tt><big>(</big><em>f</em>, <em>data</em>, <em>bins=30</em>, <em>range=None</em>, <em>quiet=False</em>, <em>weights=None</em>, <em>use_w2=False</em>, <em>printlevel=0</em>, <em>pedantic=True</em>, <em>extended=False</em>, <em>*arg</em>, <em>**kwd</em><big>)</big><a class="headerlink" href="#dist_fit.fit_binlh" title="Permalink to this definition">¶</a></dt>
-<dd><p>perform bin likelihood fit
-:param f:
-:param data:
-:param bins:
-:param range:
-:param quiet:
-:param weights:
-:param use_w2:
-:param printlevel:
-:param pedantic:
-:param extended:
-:param arg:
-:param kwd:
-:return:</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.fit_binx2">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">fit_binx2</tt><big>(</big><em>f</em>, <em>data</em>, <em>bins=30</em>, <em>range=None</em>, <em>printlevel=0</em>, <em>quiet=False</em>, <em>*arg</em>, <em>**kwd</em><big>)</big><a class="headerlink" href="#dist_fit.fit_binx2" title="Permalink to this definition">¶</a></dt>
-<dd><p>perform chi^2 fit
-:param f:
-:param data:
-:param bins:
-:param range:
-:param printlevel:
-:param quiet:
-:param arg:
-:param kwd:
-:return:</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.fit_uml">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">fit_uml</tt><big>(</big><em>f</em>, <em>data</em>, <em>quiet=False</em>, <em>printlevel=0</em>, <em>*arg</em>, <em>**kwd</em><big>)</big><a class="headerlink" href="#dist_fit.fit_uml" title="Permalink to this definition">¶</a></dt>
-<dd><p>perform unbinned likelihood fit
-:param f: pdf
-:param data: data
-:param quiet: if not quitet draw latest fit on fail fit
-:param printlevel: minuit printlevel
-:return:</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.fwhm_f">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">fwhm_f</tt><big>(</big><em>f</em>, <em>range</em>, <em>arg=None</em>, <em>bins=1000</em><big>)</big><a class="headerlink" href="#dist_fit.fwhm_f" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.gaussian">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">gaussian</tt><a class="headerlink" href="#dist_fit.gaussian" title="Permalink to this definition">¶</a></dt>
-<dd><p>gaussian(double x, double mean, double sigma)</p>
-<p>gaussian normalized for -inf to +inf</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.gen_toy">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">gen_toy</tt><big>(</big><em>f</em>, <em>nsample</em>, <em>bound</em>, <em>accuracy=10000</em>, <em>quiet=True</em>, <em>**kwd</em><big>)</big><a class="headerlink" href="#dist_fit.gen_toy" title="Permalink to this definition">¶</a></dt>
-<dd><p>generate ntoy
-:param f:
-:param nsample:
-:param ntoy:
-:param bound:
-:param accuracy:
-:param quiet:
-:param kwd: the rest of keyword argument will be passed to f
-:return: numpy.ndarray</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.gen_toyn">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">gen_toyn</tt><big>(</big><em>f</em>, <em>nsample</em>, <em>ntoy</em>, <em>bound</em>, <em>accuracy=10000</em>, <em>quiet=True</em>, <em>**kwd</em><big>)</big><a class="headerlink" href="#dist_fit.gen_toyn" title="Permalink to this definition">¶</a></dt>
-<dd><p>just alias of gentoy for nample and then reshape to ntoy,nsample)
-:param f:
-:param nsample:
-:param bound:
-:param accuracy:
-:param quiet:
-:param kwd:
-:return:</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.guess_initial">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">guess_initial</tt><big>(</big><em>alg</em>, <em>f</em>, <em>data</em>, <em>ntry=100</em>, <em>guessrange=(-100</em>, <em>100)</em>, <em>draw=False</em>, <em>*arg</em>, <em>**kwd</em><big>)</big><a class="headerlink" href="#dist_fit.guess_initial" title="Permalink to this definition">¶</a></dt>
-<dd><p>This is very bad at the moment don&#8217;t use it</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.integrate1d">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">integrate1d</tt><big>(</big><em>f</em>, <em>tuple bound</em>, <em>int nint</em>, <em>tuple arg=None</em><big>)</big><a class="headerlink" href="#dist_fit.integrate1d" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.invert_cdf">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">invert_cdf</tt><big>(</big><em>ndarray r</em>, <em>ndarray cdf</em>, <em>ndarray x</em><big>)</big><a class="headerlink" href="#dist_fit.invert_cdf" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.linear">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">linear</tt><a class="headerlink" href="#dist_fit.linear" title="Permalink to this definition">¶</a></dt>
-<dd><p>linear(double x, double m, double c)</p>
-<p>y=mx+c</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.merge_func_code">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">merge_func_code</tt><big>(</big><em>*arg</em>, <em>prefix=None</em>, <em>skip_first=False</em><big>)</big><a class="headerlink" href="#dist_fit.merge_func_code" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="class">
-<dt id="dist_fit.normalized_function">
-<em class="property">class </em><tt class="descclassname">dist_fit.</tt><tt class="descname">normalized_function</tt><big>(</big><em>xmin</em>, <em>xmax</em><big>)</big><a class="headerlink" href="#dist_fit.normalized_function" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+</div>
+<div class="section" id="builtin-functions">
+<h3>Builtin Functions<a class="headerlink" href="#builtin-functions" title="Permalink to this headline">¶</a></h3>
+<p>Refer to <a class="reference internal" href="api.html#builtin"><em>Builtin PDF</em></a>. This list can grow: implement your favorite function
+and send us pull request.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>xmin</strong> &#8211; </li>
-<li><strong>xmax</strong> &#8211; </li>
-</ul>
-</td>
+<tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.pdf.gaussian" title="probfit.pdf.gaussian"><tt class="xref py py-obj docutils literal"><span class="pre">gaussian</span></tt></a>((double&nbsp;x,&nbsp;double&nbsp;mean,&nbsp;...)</td>
+<td>Normalized gaussian.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api.html#probfit.pdf.crystalball" title="probfit.pdf.crystalball"><tt class="xref py py-obj docutils literal"><span class="pre">crystalball</span></tt></a>((double&nbsp;x,&nbsp;double&nbsp;alpha,&nbsp;...)</td>
+<td>Unnormalized crystal ball function  ..</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.pdf.cruijff" title="probfit.pdf.cruijff"><tt class="xref py py-obj docutils literal"><span class="pre">cruijff</span></tt></a>((double&nbsp;x,&nbsp;double&nbsp;m0,&nbsp;...)</td>
+<td>Unnormalized cruijff function  ..</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api.html#probfit.pdf.doublegaussian" title="probfit.pdf.doublegaussian"><tt class="xref py py-obj docutils literal"><span class="pre">doublegaussian</span></tt></a>((double&nbsp;x,&nbsp;double&nbsp;mean,&nbsp;...)</td>
+<td>Unnormalized double gaussian  ..</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.pdf.argus" title="probfit.pdf.argus"><tt class="xref py py-obj docutils literal"><span class="pre">argus</span></tt></a>((double&nbsp;x,&nbsp;double&nbsp;c,&nbsp;double&nbsp;chi,&nbsp;...)</td>
+<td>Unnormalized argus distribution  ..</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api.html#probfit.pdf.linear" title="probfit.pdf.linear"><tt class="xref py py-obj docutils literal"><span class="pre">linear</span></tt></a>((double&nbsp;x,&nbsp;double&nbsp;m,&nbsp;double&nbsp;c)&nbsp;-&gt;&nbsp;double)</td>
+<td>Linear function.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.pdf.poly2" title="probfit.pdf.poly2"><tt class="xref py py-obj docutils literal"><span class="pre">poly2</span></tt></a>((double&nbsp;x,&nbsp;double&nbsp;a,&nbsp;double&nbsp;b,&nbsp;...)</td>
+<td>Parabola  ..</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api.html#probfit.pdf.poly3" title="probfit.pdf.poly3"><tt class="xref py py-obj docutils literal"><span class="pre">poly3</span></tt></a>((double&nbsp;x,&nbsp;double&nbsp;a,&nbsp;double&nbsp;b,&nbsp;...)</td>
+<td>Polynomial of third order  ..</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.pdf.novosibirsk" title="probfit.pdf.novosibirsk"><tt class="xref py py-obj docutils literal"><span class="pre">novosibirsk</span></tt></a>((double&nbsp;x,&nbsp;double&nbsp;width,&nbsp;...)</td>
+<td>Unnormalized Novosibirsk</td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.novosibirsk">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">novosibirsk</tt><a class="headerlink" href="#dist_fit.novosibirsk" title="Permalink to this definition">¶</a></dt>
-<dd><p>novosibirsk(double x, double width, double peak, double tail)</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.parse_arg">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">parse_arg</tt><big>(</big><em>f</em>, <em>kwd</em>, <em>offset=0</em><big>)</big><a class="headerlink" href="#dist_fit.parse_arg" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
+</div>
+<div class="section" id="useful-utility">
+<h3>Useful utility<a class="headerlink" href="#useful-utility" title="Permalink to this headline">¶</a></h3>
+<p>You may find these functions useful in interactive environment.</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>f</strong> &#8211; </li>
-<li><strong>kwd</strong> &#8211; </li>
-</ul>
-</td>
+<tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.nputil.vector_apply" title="probfit.nputil.vector_apply"><tt class="xref py py-obj docutils literal"><span class="pre">vector_apply</span></tt></a>(f,&nbsp;x,&nbsp;*arg)</td>
+<td>apply <strong>f</strong> to array <strong>x</strong> with given arguments fast. This is a fast</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="api.html#probfit.plotting.draw_compare_hist" title="probfit.plotting.draw_compare_hist"><tt class="xref py py-obj docutils literal"><span class="pre">draw_compare_hist</span></tt></a>(f,&nbsp;arg,&nbsp;data[,&nbsp;bins,&nbsp;...])</td>
+<td>draw histogram of data with poisson error bar and f(x,*arg).</td>
 </tr>
 </tbody>
 </table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.poly2">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">poly2</tt><a class="headerlink" href="#dist_fit.poly2" title="Permalink to this definition">¶</a></dt>
-<dd><p>poly2(double x, double a, double b, double c)</p>
-<p>y=ax^2+bx+c</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.poly3">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">poly3</tt><a class="headerlink" href="#dist_fit.poly3" title="Permalink to this definition">¶</a></dt>
-<dd><p>poly3(double x, double a, double b, double c, double d)</p>
-<p>y=ax^2+bx+c</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.pprint_arg">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">pprint_arg</tt><big>(</big><em>vnames</em>, <em>value</em><big>)</big><a class="headerlink" href="#dist_fit.pprint_arg" title="Permalink to this definition">¶</a></dt>
-<dd><p>pretty print argument
-:param vnames:
-:param value:
-:return:</p>
-</dd></dl>
-
-<dl class="class">
-<dt id="dist_fit.rename_parameters">
-<em class="property">class </em><tt class="descclassname">dist_fit.</tt><tt class="descname">rename_parameters</tt><big>(</big><em>*arg</em><big>)</big><a class="headerlink" href="#dist_fit.rename_parameters" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>arg</strong> &#8211; </td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.try_binlh">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">try_binlh</tt><big>(</big><em>f</em>, <em>data</em>, <em>weights=None</em>, <em>bins=40</em>, <em>fbins=1000</em>, <em>show='both'</em>, <em>extended=False</em>, <em>bound=None</em>, <em>*arg</em>, <em>**kwd</em><big>)</big><a class="headerlink" href="#dist_fit.try_binlh" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.try_chi2">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">try_chi2</tt><big>(</big><em>f</em>, <em>data</em>, <em>weights=None</em>, <em>bins=40</em>, <em>fbins=1000</em>, <em>show='both'</em>, <em>*arg</em>, <em>**kwd</em><big>)</big><a class="headerlink" href="#dist_fit.try_chi2" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.try_uml">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">try_uml</tt><big>(</big><em>f</em>, <em>data</em>, <em>bins=40</em>, <em>fbins=1000</em>, <em>*arg</em>, <em>**kwd</em><big>)</big><a class="headerlink" href="#dist_fit.try_uml" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.tuplize">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">tuplize</tt><big>(</big><em>x</em><big>)</big><a class="headerlink" href="#dist_fit.tuplize" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>x</strong> &#8211; </td>
-</tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"></td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="dist_fit.ugaussian">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">ugaussian</tt><a class="headerlink" href="#dist_fit.ugaussian" title="Permalink to this definition">¶</a></dt>
-<dd><p>ugaussian(double x, double mean, double sigma)</p>
-<p>unnormed gaussian normalized</p>
-</dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.val_contour">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">val_contour</tt><big>(</big><em>fit</em>, <em>m</em>, <em>var</em>, <em>bound=None</em>, <em>step=None</em><big>)</big><a class="headerlink" href="#dist_fit.val_contour" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.val_contour2d">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">val_contour2d</tt><big>(</big><em>fit</em>, <em>m</em>, <em>var1</em>, <em>var2</em>, <em>bins=12</em>, <em>bound1=None</em>, <em>bound2=None</em><big>)</big><a class="headerlink" href="#dist_fit.val_contour2d" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.vectorize_f">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">vectorize_f</tt><big>(</big><em>f</em>, <em>x</em>, <em>arg</em><big>)</big><a class="headerlink" href="#dist_fit.vectorize_f" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.vertical_highlight">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">vertical_highlight</tt><big>(</big><em>x1</em>, <em>x2=None</em>, <em>color='g'</em>, <em>alpha=0.3</em>, <em>ax=None</em><big>)</big><a class="headerlink" href="#dist_fit.vertical_highlight" title="Permalink to this definition">¶</a></dt>
-<dd><table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
-<li><strong>x1</strong> &#8211; </li>
-<li><strong>x2</strong> &#8211; </li>
-<li><strong>color</strong> &#8211; </li>
-<li><strong>alpha</strong> &#8211; </li>
-<li><strong>ax</strong> &#8211; </li>
-</ul>
-</td>
-</tr>
-</tbody>
-</table>
-</dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.wlogyx">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">wlogyx</tt><big>(</big><em>double w</em>, <em>double y</em>, <em>double x</em><big>)</big><a class="headerlink" href="#dist_fit.wlogyx" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.xintercept">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">xintercept</tt><big>(</big><em>x0</em>, <em>y0</em>, <em>x1</em>, <em>y1</em><big>)</big><a class="headerlink" href="#dist_fit.xintercept" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.xintercept_tuple">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">xintercept_tuple</tt><big>(</big><em>t0</em>, <em>t1</em><big>)</big><a class="headerlink" href="#dist_fit.xintercept_tuple" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="function">
-<dt id="dist_fit.xlogyx">
-<tt class="descclassname">dist_fit.</tt><tt class="descname">xlogyx</tt><big>(</big><em>x</em>, <em>y</em><big>)</big><a class="headerlink" href="#dist_fit.xlogyx" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+</div>
 </div>
 </div>
 
@@ -925,13 +214,24 @@ see <a class="reference external" href="http://en.wikipedia.org/wiki/Crystal_Bal
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to dist_fit&#8217;s documentation!</a><ul>
+<li><a class="reference internal" href="#">Welcome to probfit&#8217;s documentation!</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#download-install">Download &amp; Install</a></li>
 <li><a class="reference internal" href="#tutorial">Tutorial</a></li>
-<li><a class="reference internal" href="#api">API</a></li>
+<li><a class="reference internal" href="#commonly-used-api">Commonly used API</a><ul>
+<li><a class="reference internal" href="#cost-functions">Cost Functions.</a></li>
+<li><a class="reference internal" href="#functors">Functors</a></li>
+<li><a class="reference internal" href="#builtin-functions">Builtin Functions</a></li>
+<li><a class="reference internal" href="#useful-utility">Useful utility</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 
+  <h4>Next topic</h4>
+  <p class="topless"><a href="api.html"
+                        title="next chapter">Full API Documentation</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/index.txt"
@@ -961,9 +261,9 @@ see <a class="reference external" href="http://en.wikipedia.org/wiki/Crystal_Bal
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="py-modindex.html" title="Python Module Index"
-             >modules</a> |</li>
-        <li><a href="#">dist_fit 0.1 documentation</a> &raquo;</li> 
+          <a href="api.html" title="Full API Documentation"
+             >next</a> |</li>
+        <li><a href="#">probfit 1.0.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
