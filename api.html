@@ -552,8 +552,12 @@ for every datapoint <cite>x</cite>. The fix is easy:</p>
 <dt id="probfit.functor.Convolve">
 <em class="property">class </em><tt class="descclassname">probfit.functor.</tt><tt class="descname">Convolve</tt><a class="headerlink" href="#probfit.functor.Convolve" title="Permalink to this definition">¶</a></dt>
 <dd><p>Convolve(f, g, gbound, nbins=1000)</p>
-<p>Make convolution from supplied <strong>f</strong> and <strong>g</strong>
-Argument from <strong>f</strong> and <strong>g</strong> is automatically merge by name. For example,</p>
+<p>Make convolution from supplied <strong>f</strong> and <strong>g</strong>. If your functions are
+analytically convolutable you will be better off implementing
+analytically. This functor is implemented using numerical integration with
+bound there are numerical issue that will, in most cases, lightly affect
+normalization.s</p>
+<p>Argument from <strong>f</strong> and <strong>g</strong> is automatically merge by name. For example,</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">f</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">:</span> <span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="n">b</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">c</span>
 <span class="n">g</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">sigma</span><span class="p">:</span> <span class="n">gaussian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">sigma</span><span class="p">)</span>
 <span class="n">h</span> <span class="o">=</span> <span class="n">Convolve</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">gbound</span><span class="p">)</span>
@@ -580,9 +584,14 @@ bound is important. Overbounding is recommended.</li>
 <li><strong>nbins</strong> Number of bins in multiply reverse slide add. Default(1000)</li>
 </ul>
 </div></blockquote>
-<div class="admonition-see-also admonition seealso">
-<p class="first admonition-title">See also</p>
-<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">probfit.funcutil.merge_func_code()</span></tt></p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>You may be worried about normalization. By the property of convolution:</p>
+<div class="math">
+\[\int_{\mathbf{R}^d}(f*g)(x) \, dx=\left(\int_{\mathbf{R}^d}f(x) \, dx\right)\left(\int_{\mathbf{R}^d}g(x) \, dx\right).\]</div>
+<p class="last">This means if you convolute two normalized distributions you get back
+a normalized distribution. However, since we are doing numerical
+integration here we will be off by a little bit.</p>
 </div>
 </dd></dl>
 
