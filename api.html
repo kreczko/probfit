@@ -690,8 +690,8 @@ if you have done it.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="declarator">
-<h3>Declarator<a class="headerlink" href="#declarator" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="decorator">
+<h3>Decorator<a class="headerlink" href="#decorator" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
 <dt id="probfit.decorator.normalized">
 <em class="property">class </em><tt class="descclassname">probfit.decorator.</tt><tt class="descname">normalized</tt><big>(</big><em>bound</em>, <em>nint=1000</em><big>)</big><a class="headerlink" href="#probfit.decorator.normalized" title="Permalink to this definition">¶</a></dt>
@@ -748,7 +748,7 @@ if you have done it.</p>
 <h3>cauchy<a class="headerlink" href="#cauchy" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="probfit.pdf.cauchy">
-<tt class="descclassname">probfit.pdf.</tt><tt class="descname">cauchy</tt><big>(</big><em>double x</em>, <em>double m</em>, <em>double gamma</em><big>)</big><a class="headerlink" href="#probfit.pdf.cauchy" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">probfit.pdf.</tt><tt class="descname">cauchy</tt><big>(</big><em>double x</em>, <em>double m</em>, <em>double gamma</em><big>)</big> &rarr; double<a class="headerlink" href="#probfit.pdf.cauchy" title="Permalink to this definition">¶</a></dt>
 <dd><p>Cauchy distribution aka non-relativistic Breit-Wigner</p>
 <div class="math">
 \[f(x, m, \gamma) = \frac{1}{\pi \gamma \left[ 1+\left( \frac{x-m}{\gamma} \right)^2\right]}\]</div>
@@ -764,9 +764,15 @@ if you have done it.</p>
 <dl class="function">
 <dt id="probfit.pdf.breitwigner">
 <tt class="descclassname">probfit.pdf.</tt><tt class="descname">breitwigner</tt><big>(</big><em>double x</em>, <em>double m</em>, <em>double gamma</em><big>)</big> &rarr; double<a class="headerlink" href="#probfit.pdf.breitwigner" title="Permalink to this definition">¶</a></dt>
-<dd><p>Unnormalized Relativistic Breit-Wigner</p>
+<dd><p>Normalized Relativistic Breit-Wigner</p>
 <div class="math">
-\[f(x; m, \Gamma) = \frac{1}{(x^2-m^2)^2+m^2\Gamma^2}\]</div>
+\[f(x; m, \Gamma) = N\times \frac{1}{(x^2-m^2)^2+m^2\Gamma^2}\]</div>
+<p>where</p>
+<div class="math">
+\[N = \frac{2 \sqrt{2} m \Gamma  \gamma }{\pi \sqrt{m^2+\gamma}}\]</div>
+<p>and</p>
+<div class="math">
+\[\gamma=\sqrt{m^2\left(m^2+\Gamma^2\right)}\]</div>
 <div class="admonition-see-also admonition seealso">
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="#probfit.pdf.cauchy" title="probfit.pdf.cauchy"><tt class="xref py py-func docutils literal"><span class="pre">cauchy()</span></tt></a></p>
@@ -995,7 +1001,7 @@ Default False.</li>
 <li><a class="reference internal" href="#addpdf">AddPdf</a></li>
 <li><a class="reference internal" href="#add2pdfnorm">Add2PdfNorm</a></li>
 <li><a class="reference internal" href="#rename">rename</a></li>
-<li><a class="reference internal" href="#declarator">Declarator</a></li>
+<li><a class="reference internal" href="#decorator">Decorator</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#builtin-pdf">Builtin PDF</a><ul>
