@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Full API Documentation &mdash; probfit 1.0.0 documentation</title>
+    <title>Full API Documentation &mdash; probfit 1.0.1-dev documentation</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '1.0.0',
+        VERSION:     '1.0.1-dev',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="probfit 1.0.0 documentation" href="index.html" />
+    <link rel="top" title="probfit 1.0.1-dev documentation" href="index.html" />
     <link rel="prev" title="Welcome to probfit’s documentation!" href="index.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="index.html" title="Welcome to probfit’s documentation!"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">probfit 1.0.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">probfit 1.0.1-dev documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -744,6 +744,36 @@ if you have done it.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="cauchy">
+<h3>cauchy<a class="headerlink" href="#cauchy" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="probfit.pdf.cauchy">
+<tt class="descclassname">probfit.pdf.</tt><tt class="descname">cauchy</tt><big>(</big><em>double x</em>, <em>double m</em>, <em>double gamma</em><big>)</big><a class="headerlink" href="#probfit.pdf.cauchy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Cauchy distribution aka non-relativistic Breit-Wigner</p>
+<div class="math">
+\[f(x, m, \gamma) = \frac{1}{\pi \gamma \left[ 1+\left( \frac{x-m}{\gamma} \right)^2\right]}\]</div>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#probfit.pdf.breitwigner" title="probfit.pdf.breitwigner"><tt class="xref py py-func docutils literal"><span class="pre">breitwigner()</span></tt></a></p>
+</div>
+</dd></dl>
+
+</div>
+<div class="section" id="breit-wigner">
+<h3>Breit-Wigner<a class="headerlink" href="#breit-wigner" title="Permalink to this headline">¶</a></h3>
+<dl class="function">
+<dt id="probfit.pdf.breitwigner">
+<tt class="descclassname">probfit.pdf.</tt><tt class="descname">breitwigner</tt><big>(</big><em>double x</em>, <em>double m</em>, <em>double gamma</em><big>)</big> &rarr; double<a class="headerlink" href="#probfit.pdf.breitwigner" title="Permalink to this definition">¶</a></dt>
+<dd><p>Unnormalized Relativistic Breit-Wigner</p>
+<div class="math">
+\[f(x; m, \Gamma) = \frac{1}{(x^2-m^2)^2+m^2\Gamma^2}\]</div>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#probfit.pdf.cauchy" title="probfit.pdf.cauchy"><tt class="xref py py-func docutils literal"><span class="pre">cauchy()</span></tt></a></p>
+</div>
+</dd></dl>
+
+</div>
 <div class="section" id="crystalball">
 <h3>crystalball<a class="headerlink" href="#crystalball" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
@@ -970,6 +1000,8 @@ Default False.</li>
 </li>
 <li><a class="reference internal" href="#builtin-pdf">Builtin PDF</a><ul>
 <li><a class="reference internal" href="#gaussian">gaussian</a></li>
+<li><a class="reference internal" href="#cauchy">cauchy</a></li>
+<li><a class="reference internal" href="#breit-wigner">Breit-Wigner</a></li>
 <li><a class="reference internal" href="#crystalball">crystalball</a></li>
 <li><a class="reference internal" href="#cruijff">cruijff</a></li>
 <li><a class="reference internal" href="#doublegaussian">doublegaussian</a></li>
@@ -1024,7 +1056,7 @@ Default False.</li>
         <li class="right" >
           <a href="index.html" title="Welcome to probfit’s documentation!"
              >previous</a> |</li>
-        <li><a href="index.html">probfit 1.0.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">probfit 1.0.1-dev documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

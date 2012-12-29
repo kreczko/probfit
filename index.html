@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Welcome to probfit’s documentation! &mdash; probfit 1.0.0 documentation</title>
+    <title>Welcome to probfit’s documentation! &mdash; probfit 1.0.1-dev documentation</title>
     
     <link rel="stylesheet" href="_static/nature.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -15,7 +15,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '1.0.0',
+        VERSION:     '1.0.1-dev',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <link rel="top" title="probfit 1.0.0 documentation" href="#" />
+    <link rel="top" title="probfit 1.0.1-dev documentation" href="#" />
     <link rel="next" title="Full API Documentation" href="api.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="api.html" title="Full API Documentation"
              accesskey="N">next</a> |</li>
-        <li><a href="#">probfit 1.0.0 documentation</a> &raquo;</li> 
+        <li><a href="#">probfit 1.0.1-dev documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -56,7 +56,7 @@
 <p><em>probfit</em> is a set of functions that helps you construct a complex fit. It&#8217;s
 intended to be used with <a class="reference external" href="http://iminuit.github.com/iminuit/">iminuit</a>. The
 tool includes Binned/Unbinned Likelihood estimator, <span class="math">\(\chi^2\)</span> regression,
-Binned:math:<cite>chi^2</cite> estimator and Simultaneous fit estimator. Normalization and
+Binned <span class="math">\(\chi^2\)</span> estimator and Simultaneous fit estimator. Normalization and
 Convolution with cache are also included. Various builtin function that&#8217;s
 normally used in B physics is also provided.</p>
 </div>
@@ -164,6 +164,12 @@ and send us pull request.</p>
 <tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.pdf.cruijff" title="probfit.pdf.cruijff"><tt class="xref py py-obj docutils literal"><span class="pre">cruijff</span></tt></a>((double&nbsp;x,&nbsp;double&nbsp;m0,&nbsp;...)</td>
 <td>Unnormalized cruijff function  ..</td>
 </tr>
+<tr class="row-even"><td><a class="reference internal" href="api.html#probfit.pdf.cauchy" title="probfit.pdf.cauchy"><tt class="xref py py-obj docutils literal"><span class="pre">cauchy</span></tt></a>(double&nbsp;x,&nbsp;double&nbsp;m,&nbsp;double&nbsp;gamma)</td>
+<td>Cauchy distribution aka non-relativistic Breit-Wigner</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.pdf.breitwigner" title="probfit.pdf.breitwigner"><tt class="xref py py-obj docutils literal"><span class="pre">breitwigner</span></tt></a>((double&nbsp;x,&nbsp;double&nbsp;m,&nbsp;...)</td>
+<td>Unnormalized Relativistic Breit-Wigner</td>
+</tr>
 <tr class="row-even"><td><a class="reference internal" href="api.html#probfit.pdf.doublegaussian" title="probfit.pdf.doublegaussian"><tt class="xref py py-obj docutils literal"><span class="pre">doublegaussian</span></tt></a>((double&nbsp;x,&nbsp;double&nbsp;mean,&nbsp;...)</td>
 <td>Unnormalized double gaussian  ..</td>
 </tr>
@@ -263,7 +269,7 @@ and send us pull request.</p>
         <li class="right" >
           <a href="api.html" title="Full API Documentation"
              >next</a> |</li>
-        <li><a href="#">probfit 1.0.0 documentation</a> &raquo;</li> 
+        <li><a href="#">probfit 1.0.1-dev documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
