@@ -633,40 +633,38 @@ parameters from the two merge.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="add2pdfnorm">
-<h3>Add2PdfNorm<a class="headerlink" href="#add2pdfnorm" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="addpdfnorm">
+<h3>AddPdfNorm<a class="headerlink" href="#addpdfnorm" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
-<dt id="probfit.functor.Add2PdfNorm">
-<em class="property">class </em><tt class="descclassname">probfit.functor.</tt><tt class="descname">Add2PdfNorm</tt><a class="headerlink" href="#probfit.functor.Add2PdfNorm" title="Permalink to this definition">¶</a></dt>
-<dd><p>Add2PdfNorm(f, g, facname=&#8217;k_f&#8217;)</p>
-<p>Add 2 PDF with normalization factor. Parameters are merged by name.</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">do_something</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">do_something_else</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+<dt id="probfit.functor.AddPdfNorm">
+<em class="property">class </em><tt class="descclassname">probfit.functor.</tt><tt class="descname">AddPdfNorm</tt><a class="headerlink" href="#probfit.functor.AddPdfNorm" title="Permalink to this definition">¶</a></dt>
+<dd><p>AddPdfNorm(facname=None, <a href="#id4"><span class="problematic" id="id5">*</span></a>arg, prefix=None)</p>
+<p>Add PDF with normalization factor. Parameters are merged by name.</p>
+<div class="highlight-python"><pre>def f(x, a, b, c):
+    return do_something(x, a, b, c)
+def g(x, d, a, e):
+    return do_something_else(x, d, a, e)
+def p(x, b, a, c):
+    return do_something_other_thing(x,b,a,c)
+h = Add2PdfNorm(f, g, p)
 
-<span class="n">h</span> <span class="o">=</span> <span class="n">Add2PdfNorm</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">g</span><span class="p">)</span>
-
-<span class="c">#h is equivalent to</span>
-<span class="k">def</span> <span class="nf">h_equiv</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">k_f</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">k_f</span><span class="o">*</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span><span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">k_f</span><span class="p">)</span><span class="o">*</span><span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
-</pre></div>
+#h is equivalent to
+def h_equiv(x, a, b, c, d, e, f_0, f_1):
+    return f_0*f(x, a, b, c)+ \
+           f_1*g(x, d, a, e)+
+           (1-f_0-f_1)*p(x, b, a, c)</pre>
 </div>
 <dl class="docutils">
 <dt><strong>Arguments</strong></dt>
 <dd><ul class="first last simple">
-<li><strong>f</strong> callable object f.</li>
-<li><strong>g</strong> callable object g.</li>
-<li><strong>facname</strong> name of the factor</li>
+<li><strong>facname</strong> optional list of factor name of length=. If None is given
+factor name is automatically chosen to be <cite>f_0</cite>, <cite>f_1</cite> etc.
+Default None.</li>
+<li><strong>prefix</strong> optional prefix list to prefix arguments of each function.
+Default None.</li>
 </ul>
 </dd>
 </dl>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">You are welcome to modify this so that it adds arbitary number of
-function with correct normalization. Submit a Pull request
-if you have done it.</p>
-</div>
 </dd></dl>
 
 </div>
@@ -1008,7 +1006,7 @@ Default False.</li>
 <li><a class="reference internal" href="#normalized">Normalized</a></li>
 <li><a class="reference internal" href="#convolve">Convolve</a></li>
 <li><a class="reference internal" href="#addpdf">AddPdf</a></li>
-<li><a class="reference internal" href="#add2pdfnorm">Add2PdfNorm</a></li>
+<li><a class="reference internal" href="#addpdfnorm">AddPdfNorm</a></li>
 <li><a class="reference internal" href="#rename">rename</a></li>
 <li><a class="reference internal" href="#decorator">Decorator</a></li>
 </ul>

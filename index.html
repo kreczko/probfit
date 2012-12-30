@@ -121,8 +121,8 @@ normally used in B physics is also provided.</p>
 <tr class="row-even"><td><a class="reference internal" href="api.html#probfit.functor.AddPdf" title="probfit.functor.AddPdf"><tt class="xref py py-obj docutils literal"><span class="pre">AddPdf</span></tt></a></td>
 <td>AddPdf(prefix=None, <a href="#id1"><span class="problematic" id="id2">*</span></a>arg)</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.functor.Add2PdfNorm" title="probfit.functor.Add2PdfNorm"><tt class="xref py py-obj docutils literal"><span class="pre">Add2PdfNorm</span></tt></a></td>
-<td>Add2PdfNorm(f, g, facname=&#8217;k_f&#8217;)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.functor.AddPdfNorm" title="probfit.functor.AddPdfNorm"><tt class="xref py py-obj docutils literal"><span class="pre">AddPdfNorm</span></tt></a></td>
+<td>AddPdfNorm(facname=None, <a href="#id3"><span class="problematic" id="id4">*</span></a>arg, prefix=None)</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="api.html#probfit.funcutil.rename" title="probfit.funcutil.rename"><tt class="xref py py-obj docutils literal"><span class="pre">rename</span></tt></a>(f,&nbsp;newarg)</td>
 <td>Rename function parameters.</td>
@@ -164,11 +164,11 @@ and send us pull request.</p>
 <tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.pdf.cruijff" title="probfit.pdf.cruijff"><tt class="xref py py-obj docutils literal"><span class="pre">cruijff</span></tt></a>((double&nbsp;x,&nbsp;double&nbsp;m0,&nbsp;...)</td>
 <td>Unnormalized cruijff function  ..</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api.html#probfit.pdf.cauchy" title="probfit.pdf.cauchy"><tt class="xref py py-obj docutils literal"><span class="pre">cauchy</span></tt></a>(double&nbsp;x,&nbsp;double&nbsp;m,&nbsp;double&nbsp;gamma)</td>
+<tr class="row-even"><td><a class="reference internal" href="api.html#probfit.pdf.cauchy" title="probfit.pdf.cauchy"><tt class="xref py py-obj docutils literal"><span class="pre">cauchy</span></tt></a>((double&nbsp;x,&nbsp;double&nbsp;m,&nbsp;...)</td>
 <td>Cauchy distribution aka non-relativistic Breit-Wigner</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.pdf.breitwigner" title="probfit.pdf.breitwigner"><tt class="xref py py-obj docutils literal"><span class="pre">breitwigner</span></tt></a>((double&nbsp;x,&nbsp;double&nbsp;m,&nbsp;...)</td>
-<td>Unnormalized Relativistic Breit-Wigner</td>
+<td>Normalized Relativistic Breit-Wigner</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="api.html#probfit.pdf.doublegaussian" title="probfit.pdf.doublegaussian"><tt class="xref py py-obj docutils literal"><span class="pre">doublegaussian</span></tt></a>((double&nbsp;x,&nbsp;double&nbsp;mean,&nbsp;...)</td>
 <td>Unnormalized double gaussian  ..</td>
