@@ -97,6 +97,9 @@ normally used in B physics is also provided.</p>
 <tr class="row-even"><td><a class="reference internal" href="api.html#probfit.costfunc.BinnedChi2" title="probfit.costfunc.BinnedChi2"><tt class="xref py py-obj docutils literal"><span class="pre">BinnedChi2</span></tt></a></td>
 <td>BinnedChi2(f, data, bins=40, weights=None, bound=None, sumw2=False)</td>
 </tr>
+<tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.costfunc.SimultaneousFit" title="probfit.costfunc.SimultaneousFit"><tt class="xref py py-obj docutils literal"><span class="pre">SimultaneousFit</span></tt></a></td>
+<td>SimultaneousFit(factors=None, <a href="#id1"><span class="problematic" id="id2">*</span></a>arg, prefix=None)</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -119,10 +122,10 @@ normally used in B physics is also provided.</p>
 <td>Convolve(f, g, gbound, nbins=1000)</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="api.html#probfit.functor.AddPdf" title="probfit.functor.AddPdf"><tt class="xref py py-obj docutils literal"><span class="pre">AddPdf</span></tt></a></td>
-<td>AddPdf(prefix=None, <a href="#id1"><span class="problematic" id="id2">*</span></a>arg)</td>
+<td>AddPdf(prefix=None, <a href="#id3"><span class="problematic" id="id4">*</span></a>arg)</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.functor.AddPdfNorm" title="probfit.functor.AddPdfNorm"><tt class="xref py py-obj docutils literal"><span class="pre">AddPdfNorm</span></tt></a></td>
-<td>AddPdfNorm(facname=None, <a href="#id3"><span class="problematic" id="id4">*</span></a>arg, prefix=None)</td>
+<td>AddPdfNorm(facname=None, <a href="#id5"><span class="problematic" id="id6">*</span></a>arg, prefix=None)</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="api.html#probfit.funcutil.rename" title="probfit.funcutil.rename"><tt class="xref py py-obj docutils literal"><span class="pre">rename</span></tt></a>(f,&nbsp;newarg)</td>
 <td>Rename function parameters.</td>
@@ -167,7 +170,7 @@ and send us pull request.</p>
 <tr class="row-even"><td><a class="reference internal" href="api.html#probfit.pdf.cauchy" title="probfit.pdf.cauchy"><tt class="xref py py-obj docutils literal"><span class="pre">cauchy</span></tt></a>((double&nbsp;x,&nbsp;double&nbsp;m,&nbsp;...)</td>
 <td>Cauchy distribution aka non-relativistic Breit-Wigner</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.pdf.breitwigner" title="probfit.pdf.breitwigner"><tt class="xref py py-obj docutils literal"><span class="pre">breitwigner</span></tt></a>((double&nbsp;x,&nbsp;double&nbsp;m,&nbsp;...)</td>
+<tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.pdf.rtv_breitwigner" title="probfit.pdf.rtv_breitwigner"><tt class="xref py py-obj docutils literal"><span class="pre">rtv_breitwigner</span></tt></a>((double&nbsp;x,&nbsp;double&nbsp;m,&nbsp;...)</td>
 <td>Normalized Relativistic Breit-Wigner</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="api.html#probfit.pdf.doublegaussian" title="probfit.pdf.doublegaussian"><tt class="xref py py-obj docutils literal"><span class="pre">doublegaussian</span></tt></a>((double&nbsp;x,&nbsp;double&nbsp;mean,&nbsp;...)</td>

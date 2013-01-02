@@ -58,6 +58,7 @@
 <dt id="probfit.costfunc.UnbinnedLH">
 <em class="property">class </em><tt class="descclassname">probfit.costfunc.</tt><tt class="descname">UnbinnedLH</tt><a class="headerlink" href="#probfit.costfunc.UnbinnedLH" title="Permalink to this definition">¶</a></dt>
 <dd><p>UnbinnedLH(f, data, weights=None, badvalue=-100000)</p>
+<p>__init__(self, f, data , weights=None, badvalue=-100000)</p>
 <p>Construct -log(unbinned likelihood) from callable <em>f</em>
 and data points <em>data</em>. Currently can only do 1D fit.</p>
 <div class="math">
@@ -106,7 +107,7 @@ from <cite>data</cite> is given as the frist argument.</p>
 
 <dl class="method">
 <dt id="probfit.costfunc.UnbinnedLH.draw">
-<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>bins=100</em>, <em>ax=None</em>, <em>bound=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>nfbins=200</em>, <em>print_par=False</em><big>)</big><a class="headerlink" href="#probfit.costfunc.UnbinnedLH.draw" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>bins=100</em>, <em>ax=None</em>, <em>bound=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>nfbins=200</em>, <em>print_par=False</em>, <em>args=None</em>, <em>errors=None</em>, <em>parts=False</em><big>)</big><a class="headerlink" href="#probfit.costfunc.UnbinnedLH.draw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw comparison between histogram of data and pdf.</p>
 <p><strong>Arguments</strong></p>
 <blockquote>
@@ -128,6 +129,11 @@ directy to legend loc named parameter. Default (0.05,0.95).</li>
 <li><strong>nfbins</strong> how many point pdf should be evaluated. Default 200.</li>
 <li><strong>print_par</strong> print parameters and error on the plot. Default
 False.</li>
+<li><strong>args</strong> Optional. If minuit is not given, parameter value is
+determined from args. This can be dictionary of the form
+<cite>{&#8216;a&#8217;:1.0, &#8216;b&#8217;:1.0}</cite> or list of values. Default None.</li>
+<li><strong>errors</strong> Optional dictionary of errors. If minuit is not given,
+parameter errors are determined from <strong>errors</strong>. Default None.</li>
 </ul>
 </div></blockquote>
 </dd></dl>
@@ -151,6 +157,10 @@ False.</li>
 <dt id="probfit.costfunc.BinnedLH">
 <em class="property">class </em><tt class="descclassname">probfit.costfunc.</tt><tt class="descname">BinnedLH</tt><a class="headerlink" href="#probfit.costfunc.BinnedLH" title="Permalink to this definition">¶</a></dt>
 <dd><p>BinnedLH(f, data, bins=40, weights=None, bound=None, badvalue=1000000, extended=False, use_w2=False)</p>
+<dl class="docutils">
+<dt>__init__(self, f, data, bins=40, weights=None, bound=None,</dt>
+<dd>badvalue=1000000, extended=False, use_w2=False)</dd>
+</dl>
 <p>Create a Poisson Binned Likelihood object from given PDF <strong>f</strong> and
 <strong>data</strong> (raw points not histogram). Constant term and expected minimum
 are subtracted off (aka. log likelihood ratio). The exact calculation
@@ -249,7 +259,7 @@ arguments</p>
 
 <dl class="method">
 <dt id="probfit.costfunc.BinnedLH.draw">
-<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>ax=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>nfbins=200</em>, <em>print_par=False</em><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedLH.draw" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>ax=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>nfbins=200</em>, <em>print_par=False</em>, <em>args=None</em>, <em>errors=None</em>, <em>parts=False</em><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedLH.draw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw comparison between histogram of data and pdf.</p>
 <p><strong>Arguments</strong></p>
 <blockquote>
@@ -289,6 +299,7 @@ Default False.</li>
 <dt id="probfit.costfunc.Chi2Regression">
 <em class="property">class </em><tt class="descclassname">probfit.costfunc.</tt><tt class="descname">Chi2Regression</tt><a class="headerlink" href="#probfit.costfunc.Chi2Regression" title="Permalink to this definition">¶</a></dt>
 <dd><p>Chi2Regression(f, x, y, error=None, weights=None)</p>
+<p>__init__(self, f, x, y, error=None, weights=None):</p>
 <p>Create <span class="math">\(\chi^2\)</span> regression object. This is for fitting funciton
 to data points(x,y) rather than fitting PDF to a distribution.</p>
 <div class="math">
@@ -326,7 +337,7 @@ assumed to be all 1&#8217;s.</p>
 
 <dl class="method">
 <dt id="probfit.costfunc.Chi2Regression.draw">
-<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>ax=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>print_par=False</em><big>)</big><a class="headerlink" href="#probfit.costfunc.Chi2Regression.draw" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>ax=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>print_par=False</em>, <em>args=None</em>, <em>errors=None</em><big>)</big><a class="headerlink" href="#probfit.costfunc.Chi2Regression.draw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw comparison between points (<strong>x</strong>,**y**) and the function <strong>f</strong>.</p>
 <p><strong>Arguments</strong></p>
 <blockquote>
@@ -348,7 +359,7 @@ Default False.</li>
 
 <dl class="method">
 <dt id="probfit.costfunc.Chi2Regression.show">
-<tt class="descname">show</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#probfit.costfunc.Chi2Regression.show" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">show</tt><big>(</big><em>self</em>, <em>*arg</em>, <em>**kwd</em><big>)</big><a class="headerlink" href="#probfit.costfunc.Chi2Regression.show" title="Permalink to this definition">¶</a></dt>
 <dd><p>Same thing as <a class="reference internal" href="#probfit.costfunc.Chi2Regression.draw" title="probfit.costfunc.Chi2Regression.draw"><tt class="xref py py-meth docutils literal"><span class="pre">draw()</span></tt></a>. But show the figure immediately.</p>
 <div class="admonition-see-also admonition seealso">
 <p class="first admonition-title">See also</p>
@@ -365,6 +376,10 @@ Default False.</li>
 <dt id="probfit.costfunc.BinnedChi2">
 <em class="property">class </em><tt class="descclassname">probfit.costfunc.</tt><tt class="descname">BinnedChi2</tt><a class="headerlink" href="#probfit.costfunc.BinnedChi2" title="Permalink to this definition">¶</a></dt>
 <dd><p>BinnedChi2(f, data, bins=40, weights=None, bound=None, sumw2=False)</p>
+<dl class="docutils">
+<dt>__init__(self, f, data, bins=40, weights=None, bound=None,</dt>
+<dd>sumw2=False):</dd>
+</dl>
 <p>Create Binned Chi2 Object. It calculates chi^2 assuming poisson
 statistics.</p>
 <div class="math">
@@ -411,7 +426,7 @@ it&#8217;s automatically determined from the data.</p>
 
 <dl class="method">
 <dt id="probfit.costfunc.BinnedChi2.draw">
-<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>ax=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>nfbins=200</em>, <em>print_par=False</em><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedChi2.draw" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>ax=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>nfbins=200</em>, <em>print_par=False</em>, <em>args=None</em>, <em>errors=None</em>, <em>parts=False</em><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedChi2.draw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw comparison histogram of data and the function <strong>f</strong>.</p>
 <p><strong>Arguments</strong></p>
 <blockquote>
@@ -445,9 +460,57 @@ Default False.</li>
 </dd></dl>
 
 </div>
+<div class="section" id="binned-simultaneousfit">
+<h3>Binned SimultaneousFit<a class="headerlink" href="#binned-simultaneousfit" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="probfit.costfunc.SimultaneousFit">
+<em class="property">class </em><tt class="descclassname">probfit.costfunc.</tt><tt class="descname">SimultaneousFit</tt><a class="headerlink" href="#probfit.costfunc.SimultaneousFit" title="Permalink to this definition">¶</a></dt>
+<dd><p>SimultaneousFit(factors=None, <a href="#id1"><span class="problematic" id="id2">*</span></a>arg, prefix=None)</p>
+<p>__init__(self, <a href="#id3"><span class="problematic" id="id4">*</span></a>arg, factors=None, prefix=None):</p>
+<p>Construct Simultaneous fit from given cost functions.</p>
+<p><strong>Arguments</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><strong>factors</strong> Optional factor array. If not None, each cost function
+is scaled by <cite>factors[i]</cite> before being summed up. Default None.</li>
+<li><strong>prefix</strong> Optional list of prefix. Add prefix to variablename of
+each cost function so that you don&#8217;t accidentally merge them.
+Default None.</li>
+</ul>
+</div></blockquote>
+<dl class="method">
+<dt id="probfit.costfunc.SimultaneousFit.__call__">
+<tt class="descname">__call__</tt><big>(</big><em>...) &lt;==&gt; x(...</em><big>)</big><a class="headerlink" href="#probfit.costfunc.SimultaneousFit.__call__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="probfit.costfunc.SimultaneousFit.args_and_error_for">
+<tt class="descname">args_and_error_for</tt><big>(</big><em>self</em>, <em>findex</em>, <em>minuit=None</em>, <em>args=None</em>, <em>errors=None</em><big>)</big><a class="headerlink" href="#probfit.costfunc.SimultaneousFit.args_and_error_for" title="Permalink to this definition">¶</a></dt>
+<dd><p>convert argument from minuit/dictionary/errors to argument and error
+for cost function with index <strong>findex</strong></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="probfit.costfunc.SimultaneousFit.draw">
+<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>args=None</em>, <em>errors=None</em><big>)</big><a class="headerlink" href="#probfit.costfunc.SimultaneousFit.draw" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="probfit.costfunc.SimultaneousFit.show">
+<tt class="descname">show</tt><big>(</big><em>self</em>, <em>m=None</em><big>)</big><a class="headerlink" href="#probfit.costfunc.SimultaneousFit.show" title="Permalink to this definition">¶</a></dt>
+<dd><p>Same thing as <a class="reference internal" href="#probfit.costfunc.SimultaneousFit.draw" title="probfit.costfunc.SimultaneousFit.draw"><tt class="xref py py-meth docutils literal"><span class="pre">draw()</span></tt></a>. But show the figure immediately.</p>
+<div class="admonition-see-also admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="#probfit.costfunc.SimultaneousFit.draw" title="probfit.costfunc.SimultaneousFit.draw"><tt class="xref py py-meth docutils literal"><span class="pre">draw()</span></tt></a> for arguments.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
 </div>
 <div class="section" id="functor">
-<span id="id1"></span><h2>Functor<a class="headerlink" href="#functor" title="Permalink to this headline">¶</a></h2>
+<span id="id5"></span><h2>Functor<a class="headerlink" href="#functor" title="Permalink to this headline">¶</a></h2>
 <p>Manipulate and combined your pdf in various ways.</p>
 <div class="section" id="extended">
 <h3>Extended<a class="headerlink" href="#extended" title="Permalink to this headline">¶</a></h3>
@@ -601,7 +664,7 @@ integration here we will be off by a little bit.</p>
 <dl class="class">
 <dt id="probfit.functor.AddPdf">
 <em class="property">class </em><tt class="descclassname">probfit.functor.</tt><tt class="descname">AddPdf</tt><a class="headerlink" href="#probfit.functor.AddPdf" title="Permalink to this definition">¶</a></dt>
-<dd><p>AddPdf(prefix=None, <a href="#id2"><span class="problematic" id="id3">*</span></a>arg)</p>
+<dd><p>AddPdf(prefix=None, <a href="#id6"><span class="problematic" id="id7">*</span></a>arg)</p>
 <p>Directly add PDF without normalization nor factor.
 Parmeters are merged by names.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
@@ -638,7 +701,7 @@ parameters from the two merge.</p>
 <dl class="class">
 <dt id="probfit.functor.AddPdfNorm">
 <em class="property">class </em><tt class="descclassname">probfit.functor.</tt><tt class="descname">AddPdfNorm</tt><a class="headerlink" href="#probfit.functor.AddPdfNorm" title="Permalink to this definition">¶</a></dt>
-<dd><p>AddPdfNorm(facname=None, <a href="#id4"><span class="problematic" id="id5">*</span></a>arg, prefix=None)</p>
+<dd><p>AddPdfNorm(facname=None, <a href="#id8"><span class="problematic" id="id9">*</span></a>arg, prefix=None)</p>
 <p>Add PDF with normalization factor. Parameters are merged by name.</p>
 <div class="highlight-python"><pre>def f(x, a, b, c):
     return do_something(x, a, b, c)
@@ -761,7 +824,7 @@ Default None.</li>
 \[f(x, m, \gamma) = \frac{1}{\pi \gamma \left[ 1+\left( \frac{x-m}{\gamma} \right)^2\right]}\]</div>
 <div class="admonition-see-also admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="#probfit.pdf.breitwigner" title="probfit.pdf.breitwigner"><tt class="xref py py-func docutils literal"><span class="pre">breitwigner()</span></tt></a></p>
+<p class="last"><tt class="xref py py-func docutils literal"><span class="pre">breitwigner()</span></tt></p>
 </div>
 </dd></dl>
 
@@ -769,8 +832,8 @@ Default None.</li>
 <div class="section" id="breit-wigner">
 <h3>Breit-Wigner<a class="headerlink" href="#breit-wigner" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
-<dt id="probfit.pdf.breitwigner">
-<tt class="descclassname">probfit.pdf.</tt><tt class="descname">breitwigner</tt><big>(</big><em>double x</em>, <em>double m</em>, <em>double gamma</em><big>)</big> &rarr; double<a class="headerlink" href="#probfit.pdf.breitwigner" title="Permalink to this definition">¶</a></dt>
+<dt id="probfit.pdf.rtv_breitwigner">
+<tt class="descclassname">probfit.pdf.</tt><tt class="descname">rtv_breitwigner</tt><big>(</big><em>double x</em>, <em>double m</em>, <em>double gamma</em><big>)</big> &rarr; double<a class="headerlink" href="#probfit.pdf.rtv_breitwigner" title="Permalink to this definition">¶</a></dt>
 <dd><p>Normalized Relativistic Breit-Wigner</p>
 <div class="math">
 \[f(x; m, \Gamma) = N\times \frac{1}{(x^2-m^2)^2+m^2\Gamma^2}\]</div>
@@ -999,6 +1062,7 @@ Default False.</li>
 <li><a class="reference internal" href="#binned-likelihood">Binned Likelihood</a></li>
 <li><a class="reference internal" href="#regression"><span class="math">\(\chi^2\)</span> Regression</a></li>
 <li><a class="reference internal" href="#binned">Binned <span class="math">\(\chi^2\)</span></a></li>
+<li><a class="reference internal" href="#binned-simultaneousfit">Binned SimultaneousFit</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#functor">Functor</a><ul>
