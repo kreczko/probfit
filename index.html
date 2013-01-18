@@ -8,7 +8,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
 
-    <title>Welcome to probfit’s documentation! &mdash; probfit 1.0.3-dev documentation</title>
+    <title>probfit &mdash; probfit 1.0.3-dev documentation</title>
 
 <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
 
@@ -16,6 +16,7 @@
     
     <link rel="stylesheet" href="_static/rtd.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/jquery.lightbox-0.5.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -31,6 +32,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="_static/searchtools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery.lightbox-0.5.min.js"></script>
     <link rel="top" title="probfit 1.0.3-dev documentation" href="#" />
     <link rel="next" title="Full API Documentation" href="api.html" /> 
   </head>
@@ -47,7 +49,7 @@
         <li><a href="#">probfit 1.0.3-dev documentation</a> &raquo;</li> 
       </ul>
     </div>
-<a href="https://github.com/iminuit/probfit"><img style="position: absolute; top: 40px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+<a href="https://github.com/iminuit/probfit"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
   
 
     <div class="document">
@@ -55,18 +57,15 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="welcome-to-probfit-s-documentation">
-<h1>Welcome to probfit&#8217;s documentation!<a class="headerlink" href="#welcome-to-probfit-s-documentation" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-</div>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="probfit">
+<h1>probfit<a class="headerlink" href="#probfit" title="Permalink to this headline">¶</a></h1>
 <p><em>probfit</em> is a set of functions that helps you construct a complex fit. It&#8217;s
 intended to be used with <a class="reference external" href="http://iminuit.github.com/iminuit/">iminuit</a>. The
 tool includes Binned/Unbinned Likelihood estimator, <span class="math">\(\chi^2\)</span> regression,
 Binned <span class="math">\(\chi^2\)</span> estimator and Simultaneous fit estimator. Normalization and
 Convolution with cache are also included. Various builtin function that&#8217;s
 normally used in B physics is also provided.</p>
+<div class="toctree-wrapper compound">
 </div>
 <div class="section" id="download-install">
 <h2>Download &amp; Install<a class="headerlink" href="#download-install" title="Permalink to this headline">¶</a></h2>
@@ -214,7 +213,10 @@ and send us pull request.</p>
 <tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.nputil.vector_apply" title="probfit.nputil.vector_apply"><tt class="xref py py-obj docutils literal"><span class="pre">vector_apply</span></tt></a>(f,&nbsp;x,&nbsp;*arg)</td>
 <td>apply <strong>f</strong> to array <strong>x</strong> with given arguments fast. This is a fast</td>
 </tr>
-<tr class="row-even"><td><a class="reference internal" href="api.html#probfit.plotting.draw_compare_hist" title="probfit.plotting.draw_compare_hist"><tt class="xref py py-obj docutils literal"><span class="pre">draw_compare_hist</span></tt></a>(f,&nbsp;arg,&nbsp;data[,&nbsp;bins,&nbsp;...])</td>
+<tr class="row-even"><td><a class="reference internal" href="api.html#probfit.plotting.draw_pdf" title="probfit.plotting.draw_pdf"><tt class="xref py py-obj docutils literal"><span class="pre">draw_pdf</span></tt></a>(f,&nbsp;arg,&nbsp;bound[,&nbsp;bins,&nbsp;scale,&nbsp;...])</td>
+<td>draw pdf with given argument and bounds.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.plotting.draw_compare_hist" title="probfit.plotting.draw_compare_hist"><tt class="xref py py-obj docutils literal"><span class="pre">draw_compare_hist</span></tt></a>(f,&nbsp;arg,&nbsp;data[,&nbsp;bins,&nbsp;...])</td>
 <td>draw histogram of data with poisson error bar and f(x,*arg).</td>
 </tr>
 </tbody>
@@ -231,8 +233,7 @@ and send us pull request.</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="#">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to probfit&#8217;s documentation!</a><ul>
-<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#">probfit</a><ul>
 <li><a class="reference internal" href="#download-install">Download &amp; Install</a></li>
 <li><a class="reference internal" href="#tutorial">Tutorial</a></li>
 <li><a class="reference internal" href="#commonly-used-api">Commonly used API</a><ul>
@@ -293,7 +294,19 @@ and send us pull request.</p>
 
 
 
-
+<script type="text/javascript">
+  var lightbox_setting = {
+    imageLoading:'_static/images/lightbox-ico-loading.gif',
+    imageBtnPrev:'_static/images/lightbox-btn-prev.gif',
+    imageBtnNext:'_static/images/lightbox-btn-next.gif',
+    imageBtnClose:'_static/images/lightbox-btn-close.gif',
+    imageBlank:'_static/images/lightbox-blank.gif'
+  }
+  $('img.lightbox').each(function(){
+    $(this).wrap('<a href="'+$(this).attr('src')+'" class="lb"/>')
+  })
+  $('a.lb').lightBox(lightbox_setting)
+</script>
 
   </body>
 </html>

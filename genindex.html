@@ -18,6 +18,7 @@
     
     <link rel="stylesheet" href="_static/rtd.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/jquery.lightbox-0.5.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
@@ -33,6 +34,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="_static/searchtools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery.lightbox-0.5.min.js"></script>
     <link rel="top" title="probfit 1.0.3-dev documentation" href="index.html" /> 
   </head>
   <body>
@@ -45,7 +47,7 @@
         <li><a href="index.html">probfit 1.0.3-dev documentation</a> &raquo;</li> 
       </ul>
     </div>
-<a href="https://github.com/iminuit/probfit"><img style="position: absolute; top: 40px; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+<a href="https://github.com/iminuit/probfit"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
   
 
     <div class="document">
@@ -202,6 +204,10 @@
   <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="api.html#probfit.plotting.draw_compare_hist">draw_compare_hist() (in module probfit.plotting)</a>
+  </dt>
+
+      
+  <dt><a href="api.html#probfit.plotting.draw_pdf">draw_pdf() (in module probfit.plotting)</a>
   </dt>
 
   </dl></td>
@@ -399,7 +405,19 @@
 
 
 
-
+<script type="text/javascript">
+  var lightbox_setting = {
+    imageLoading:'_static/images/lightbox-ico-loading.gif',
+    imageBtnPrev:'_static/images/lightbox-btn-prev.gif',
+    imageBtnNext:'_static/images/lightbox-btn-next.gif',
+    imageBtnClose:'_static/images/lightbox-btn-close.gif',
+    imageBlank:'_static/images/lightbox-blank.gif'
+  }
+  $('img.lightbox').each(function(){
+    $(this).wrap('<a href="'+$(this).attr('src')+'" class="lb"/>')
+  })
+  $('a.lb').lightBox(lightbox_setting)
+</script>
 
   </body>
 </html>

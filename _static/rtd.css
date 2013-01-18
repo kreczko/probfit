@@ -66,6 +66,9 @@ div.documentwrapper {
     background-color: #e8ecef;
 }
 
+.lightbox{
+    height: 240px;
+}
 
 /* HEADINGS --------------------------------------------------------------- */
 
@@ -181,6 +184,7 @@ div.body a.headerlink:hover {
 
 div.related ul {
     height: 2.5em;
+    padding-right: 140px;
 }
 
 div.related ul li {
