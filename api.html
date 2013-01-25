@@ -67,7 +67,7 @@
 <dl class="class">
 <dt id="probfit.costfunc.UnbinnedLH">
 <em class="property">class </em><tt class="descclassname">probfit.costfunc.</tt><tt class="descname">UnbinnedLH</tt><a class="headerlink" href="#probfit.costfunc.UnbinnedLH" title="Permalink to this definition">¶</a></dt>
-<dd><p>UnbinnedLH(f, data, weights=None, badvalue=-100000)</p>
+<dd><p>UnbinnedLH(f, data, weights=None, extended=False, extended_bound=None, extended_nint=1000, badvalue=-100000)</p>
 <p>__init__(self, f, data , weights=None, badvalue=-100000)</p>
 <p>Construct -log(unbinned likelihood) from callable <em>f</em>
 and data points <em>data</em>. Currently can only do 1D fit.</p>
@@ -97,6 +97,18 @@ or your PDF parameter has gone into unphysical region and return
 negative probability density. This should be a large negative
 number so that iminuit will avoid those points. Default -100000.</p>
 </li>
+<li><p class="first"><strong>extended</strong> Set to True for extended fit. Default False. If Set
+to True the following term is added to resulting negative log
+likelihood</p>
+<div class="math">
+\[\textrm{ext_term} = \int_{x \in \textrm{extended_bound}}f(x, args, \ldots) \textrm{d} x\]</div>
+</li>
+<li><p class="first"><strong>extended_bound</strong> Bound for calculating extended term.
+Default None.</p>
+</li>
+<li><p class="first"><strong>extended_nint</strong> number of trapezoid pieces to sum up as 
+integral for extende Term. Default 1000.</p>
+</li>
 </ul>
 </div></blockquote>
 <div class="admonition note">
@@ -117,7 +129,7 @@ from <cite>data</cite> is given as the frist argument.</p>
 
 <dl class="method">
 <dt id="probfit.costfunc.UnbinnedLH.draw">
-<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>bins=100</em>, <em>ax=None</em>, <em>bound=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>nfbins=200</em>, <em>print_par=False</em>, <em>args=None</em>, <em>errors=None</em>, <em>parts=False</em><big>)</big><a class="headerlink" href="#probfit.costfunc.UnbinnedLH.draw" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>bins=100</em>, <em>ax=None</em>, <em>bound=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>nfbins=200</em>, <em>print_par=True</em>, <em>args=None</em>, <em>errors=None</em>, <em>parts=False</em><big>)</big><a class="headerlink" href="#probfit.costfunc.UnbinnedLH.draw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw comparison between histogram of data and pdf.</p>
 <p><strong>Arguments</strong></p>
 <blockquote>
@@ -138,7 +150,7 @@ not within the bound the picture may look funny.</li>
 directy to legend loc named parameter. Default (0.05,0.95).</li>
 <li><strong>nfbins</strong> how many point pdf should be evaluated. Default 200.</li>
 <li><strong>print_par</strong> print parameters and error on the plot. Default
-False.</li>
+True.</li>
 <li><strong>args</strong> Optional. If minuit is not given, parameter value is
 determined from args. This can be dictionary of the form
 <cite>{&#8216;a&#8217;:1.0, &#8216;b&#8217;:1.0}</cite> or list of values. Default None.</li>
@@ -276,7 +288,7 @@ arguments</p>
 
 <dl class="method">
 <dt id="probfit.costfunc.BinnedLH.draw">
-<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>ax=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>nfbins=200</em>, <em>print_par=False</em>, <em>args=None</em>, <em>errors=None</em>, <em>parts=False</em><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedLH.draw" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>ax=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>nfbins=200</em>, <em>print_par=True</em>, <em>args=None</em>, <em>errors=None</em>, <em>parts=False</em><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedLH.draw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw comparison between histogram of data and pdf.</p>
 <p><strong>Arguments</strong></p>
 <blockquote>
@@ -292,7 +304,7 @@ axes <tt class="docutils literal"><span class="pre">gca()</span></tt>.</li>
 directy to legend loc named parameter. Default (0.05,0.95).</li>
 <li><strong>nfbins</strong> how many point pdf should be evaluated. Default 200.</li>
 <li><strong>print_par</strong> print parameters and error on the plot.
-Default False.</li>
+Default True.</li>
 </ul>
 </div></blockquote>
 </dd></dl>
@@ -361,7 +373,7 @@ assumed to be all 1&#8217;s.</p>
 
 <dl class="method">
 <dt id="probfit.costfunc.Chi2Regression.draw">
-<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>ax=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>print_par=False</em>, <em>args=None</em>, <em>errors=None</em><big>)</big><a class="headerlink" href="#probfit.costfunc.Chi2Regression.draw" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>ax=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>print_par=True</em>, <em>args=None</em>, <em>errors=None</em><big>)</big><a class="headerlink" href="#probfit.costfunc.Chi2Regression.draw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw comparison between points (<strong>x</strong>,**y**) and the function <strong>f</strong>.</p>
 <p><strong>Arguments</strong></p>
 <blockquote>
@@ -376,7 +388,7 @@ axes <tt class="docutils literal"><span class="pre">gca()</span></tt>.</li>
 <li><strong>parmloc</strong> location of parameter print out. This is passed
 directy to legend loc named parameter. Default (0.05,0.95).</li>
 <li><strong>print_par</strong> print parameters and error on the plot.
-Default False.</li>
+Default True.</li>
 </ul>
 </div></blockquote>
 </dd></dl>
@@ -457,7 +469,7 @@ it&#8217;s automatically determined from the data.</p>
 
 <dl class="method">
 <dt id="probfit.costfunc.BinnedChi2.draw">
-<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>ax=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>nfbins=200</em>, <em>print_par=False</em>, <em>args=None</em>, <em>errors=None</em>, <em>parts=False</em><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedChi2.draw" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>ax=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>nfbins=200</em>, <em>print_par=True</em>, <em>args=None</em>, <em>errors=None</em>, <em>parts=False</em><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedChi2.draw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw comparison histogram of data and the function <strong>f</strong>.</p>
 <p><strong>Arguments</strong></p>
 <blockquote>
@@ -473,7 +485,7 @@ axes <tt class="docutils literal"><span class="pre">gca()</span></tt>.</li>
 directy to legend loc named parameter. Default (0.05,0.95).</li>
 <li><strong>nfbins</strong> number of points to calculate f</li>
 <li><strong>print_par</strong> print parameters and error on the plot.
-Default False.</li>
+Default True.</li>
 </ul>
 </div></blockquote>
 </dd></dl>
@@ -503,7 +515,7 @@ Default False.</li>
 <dl class="class">
 <dt id="probfit.costfunc.SimultaneousFit">
 <em class="property">class </em><tt class="descclassname">probfit.costfunc.</tt><tt class="descname">SimultaneousFit</tt><a class="headerlink" href="#probfit.costfunc.SimultaneousFit" title="Permalink to this definition">¶</a></dt>
-<dd><p>SimultaneousFit(factors=None, <a href="#id1"><span class="problematic" id="id2">*</span></a>arg, prefix=None)</p>
+<dd><p>SimultaneousFit(factors=None, <a href="#id1"><span class="problematic" id="id2">*</span></a>arg, prefix=None, skip_prefix=None)</p>
 <p>__init__(self, <a href="#id3"><span class="problematic" id="id4">*</span></a>arg, factors=None, prefix=None):</p>
 <p>Construct Simultaneous fit from given cost functions.</p>
 <p><strong>Arguments</strong></p>
@@ -514,6 +526,9 @@ is scaled by <cite>factors[i]</cite> before being summed up. Default None.</li>
 <li><strong>prefix</strong> Optional list of prefix. Add prefix to variablename of
 each cost function so that you don&#8217;t accidentally merge them.
 Default None.</li>
+<li><strong>skip_prefix</strong> list of variable names that prefix should not be
+applied to. Useful if you want to prefix them and shared some
+of them.</li>
 </ul>
 </div></blockquote>
 <dl class="method">
@@ -530,7 +545,7 @@ for cost function with index <strong>findex</strong></p>
 
 <dl class="method">
 <dt id="probfit.costfunc.SimultaneousFit.draw">
-<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>args=None</em>, <em>errors=None</em><big>)</big><a class="headerlink" href="#probfit.costfunc.SimultaneousFit.draw" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>args=None</em>, <em>errors=None</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#probfit.costfunc.SimultaneousFit.draw" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -714,7 +729,7 @@ integration here we will be off by a little bit.</p>
 <dl class="class">
 <dt id="probfit.functor.AddPdf">
 <em class="property">class </em><tt class="descclassname">probfit.functor.</tt><tt class="descname">AddPdf</tt><a class="headerlink" href="#probfit.functor.AddPdf" title="Permalink to this definition">¶</a></dt>
-<dd><p>AddPdf(prefix=None, <a href="#id6"><span class="problematic" id="id7">*</span></a>arg)</p>
+<dd><p>AddPdf(prefix=None, <a href="#id6"><span class="problematic" id="id7">*</span></a>arg, factors=None, skip_prefix=None)</p>
 <p>Directly add PDF without normalization nor factor.
 Parmeters are merged by names.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
@@ -741,6 +756,19 @@ parameters from the two merge.</p>
 </pre></div>
 </div>
 </li>
+<li><p class="first"><strong>factors</strong> list of callable factor function if given Add pdf
+will simulate the pdf of the form:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">factor</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">f</span> <span class="o">+</span> <span class="n">factor</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">g</span>
+</pre></div>
+</div>
+<p>Note that all argument for callable factors will be prefixed(if 
+given) as opposed to skipping the first one for pdf list. If None
+is given, all factors are assume to be constant 1. Default None.</p>
+</li>
+<li><p class="first"><strong>skip_prefix</strong> list of variable that should not be prefixed.
+Default None. This is useful when you want to mix prefixing
+and sharing some of variable.</p>
+</li>
 </ul>
 </div></blockquote>
 </dd></dl>
@@ -758,7 +786,7 @@ parameters from the two merge.</p>
 <dl class="class">
 <dt id="probfit.functor.AddPdfNorm">
 <em class="property">class </em><tt class="descclassname">probfit.functor.</tt><tt class="descname">AddPdfNorm</tt><a class="headerlink" href="#probfit.functor.AddPdfNorm" title="Permalink to this definition">¶</a></dt>
-<dd><p>AddPdfNorm(facname=None, <a href="#id8"><span class="problematic" id="id9">*</span></a>arg, prefix=None)</p>
+<dd><p>AddPdfNorm(facname=None, <a href="#id8"><span class="problematic" id="id9">*</span></a>arg, prefix=None, skip_prefix=None)</p>
 <p>Add PDF with normalization factor. Parameters are merged by name.</p>
 <div class="highlight-python"><pre>def f(x, a, b, c):
     return do_something(x, a, b, c)
@@ -782,6 +810,8 @@ factor name is automatically chosen to be <cite>f_0</cite>, <cite>f_1</cite> etc
 Default None.</li>
 <li><strong>prefix</strong> optional prefix list to prefix arguments of each function.
 Default None.</li>
+<li><strong>skip_prefix</strong> optional list of variable that prefix will not be
+applied to. Default None(empty).</li>
 </ul>
 </dd>
 </dl>
