@@ -121,7 +121,7 @@ and write document telling people about the caveat.</p>
 </div>
 <dl class="method">
 <dt id="probfit.costfunc.UnbinnedLH.__call__">
-<tt class="descname">__call__</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#probfit.costfunc.UnbinnedLH.__call__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__call__</tt><big>(</big><big>)</big><a class="headerlink" href="#probfit.costfunc.UnbinnedLH.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute sum of -log(lh) given positional arguments.
 Position argument will be passed to pdf with independent vairable
 from <cite>data</cite> is given as the frist argument.</p>
@@ -281,7 +281,7 @@ unweighted statistics. Default False.</p>
 </div></blockquote>
 <dl class="method">
 <dt id="probfit.costfunc.BinnedLH.__call__">
-<tt class="descname">__call__</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedLH.__call__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__call__</tt><big>(</big><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedLH.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate sum -log(poisson binned likelihood) given positional
 arguments</p>
 </dd></dl>
@@ -367,7 +367,7 @@ assumed to be all 1&#8217;s.</p>
 </dl>
 <dl class="method">
 <dt id="probfit.costfunc.Chi2Regression.__call__">
-<tt class="descname">__call__</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#probfit.costfunc.Chi2Regression.__call__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__call__</tt><big>(</big><big>)</big><a class="headerlink" href="#probfit.costfunc.Chi2Regression.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute <span class="math">\(\chi^2\)</span></p>
 </dd></dl>
 
@@ -463,7 +463,7 @@ it&#8217;s automatically determined from the data.</p>
 </div></blockquote>
 <dl class="method">
 <dt id="probfit.costfunc.BinnedChi2.__call__">
-<tt class="descname">__call__</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedChi2.__call__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__call__</tt><big>(</big><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedChi2.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate <span class="math">\(\chi^2\)</span> given positional arguments</p>
 </dd></dl>
 
@@ -516,7 +516,7 @@ Default True.</li>
 <dt id="probfit.costfunc.SimultaneousFit">
 <em class="property">class </em><tt class="descclassname">probfit.costfunc.</tt><tt class="descname">SimultaneousFit</tt><a class="headerlink" href="#probfit.costfunc.SimultaneousFit" title="Permalink to this definition">¶</a></dt>
 <dd><p>SimultaneousFit(factors=None, <a href="#id1"><span class="problematic" id="id2">*</span></a>arg, prefix=None, skip_prefix=None)</p>
-<p>__init__(self, <a href="#id3"><span class="problematic" id="id4">*</span></a>arg, factors=None, prefix=None):</p>
+<p>__init__(self, <a href="#id3"><span class="problematic" id="id4">*</span></a>arg, factors=None, prefix=None, skip_prefix=None):</p>
 <p>Construct Simultaneous fit from given cost functions.</p>
 <p><strong>Arguments</strong></p>
 <blockquote>
@@ -1126,6 +1126,21 @@ lowest order and the last one will be the highest order</p>
 <img alt="_images/polynomial.png" class="lightbox" src="_images/polynomial.png" />
 </div>
 </div>
+<div class="section" id="histogrampdf">
+<h3>HistogramPdf<a class="headerlink" href="#histogrampdf" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="probfit.pdf.HistogramPdf">
+<em class="property">class </em><tt class="descclassname">probfit.pdf.</tt><tt class="descname">HistogramPdf</tt><a class="headerlink" href="#probfit.pdf.HistogramPdf" title="Permalink to this definition">¶</a></dt>
+<dd><p>HistogramPdf(hy, binedges, xname=&#8217;x&#8217;)</p>
+<p>A histogram PDF. User supplies a template histogram with bin contents and bin
+edges. The histogram does not have to be normalized. The resulting PDF is normalized.</p>
+</dd></dl>
+
+<p>(<a class="reference external" href="./pyplots/pdf/histogrampdf.py">Source code</a>, <a class="reference external" href="./pyplots/pdf/histogrampdf.png">png</a>, <a class="reference external" href="./pyplots/pdf/histogrampdf.hires.png">hires.png</a>, <a class="reference external" href="./pyplots/pdf/histogrampdf.pdf">pdf</a>)</p>
+<div class="figure">
+<img alt="_images/histogrampdf.png" class="lightbox" src="_images/histogrampdf.png" />
+</div>
+</div>
 </div>
 <div class="section" id="useful-utility-function">
 <h2>Useful Utility Function<a class="headerlink" href="#useful-utility-function" title="Permalink to this headline">¶</a></h2>
@@ -1245,6 +1260,7 @@ Default False.</li>
 <li><a class="reference internal" href="#poly2">poly2</a></li>
 <li><a class="reference internal" href="#poly3">poly3</a></li>
 <li><a class="reference internal" href="#polynomial">Polynomial</a></li>
+<li><a class="reference internal" href="#histogrampdf">HistogramPdf</a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#useful-utility-function">Useful Utility Function</a><ul>
