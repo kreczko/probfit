@@ -93,16 +93,16 @@ normally used in B physics is also provided.</p>
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.costfunc.UnbinnedLH" title="probfit.costfunc.UnbinnedLH"><tt class="xref py py-obj docutils literal"><span class="pre">UnbinnedLH</span></tt></a></td>
-<td>UnbinnedLH(f, data, weights=None, extended=False, extended_bound=None, extended_nint=1000, badvalue=-100000)</td>
+<td>UnbinnedLH(f, data, weights=None, extended=False, extended_bound=None, extended_nint=100, badvalue=-100000)</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="api.html#probfit.costfunc.BinnedLH" title="probfit.costfunc.BinnedLH"><tt class="xref py py-obj docutils literal"><span class="pre">BinnedLH</span></tt></a></td>
-<td>BinnedLH(f, data, bins=40, weights=None, bound=None, badvalue=1000000, extended=False, use_w2=False, nint_subdiv=5)</td>
+<td>BinnedLH(f, data, bins=40, weights=None, bound=None, badvalue=1000000, extended=False, use_w2=False, nint_subdiv=1)</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.costfunc.Chi2Regression" title="probfit.costfunc.Chi2Regression"><tt class="xref py py-obj docutils literal"><span class="pre">Chi2Regression</span></tt></a></td>
 <td>Chi2Regression(f, x, y, error=None, weights=None)</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="api.html#probfit.costfunc.BinnedChi2" title="probfit.costfunc.BinnedChi2"><tt class="xref py py-obj docutils literal"><span class="pre">BinnedChi2</span></tt></a></td>
-<td>BinnedChi2(f, data, bins=40, weights=None, bound=None, sumw2=False, nint_subdiv=5)</td>
+<td>BinnedChi2(f, data, bins=40, weights=None, bound=None, sumw2=False, nint_subdiv=1)</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.costfunc.SimultaneousFit" title="probfit.costfunc.SimultaneousFit"><tt class="xref py py-obj docutils literal"><span class="pre">SimultaneousFit</span></tt></a></td>
 <td>SimultaneousFit(factors=None, <a href="#id1"><span class="problematic" id="id2">*</span></a>arg, prefix=None, skip_prefix=None)</td>
@@ -120,7 +120,7 @@ normally used in B physics is also provided.</p>
 </colgroup>
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="api.html#probfit.functor.Normalized" title="probfit.functor.Normalized"><tt class="xref py py-obj docutils literal"><span class="pre">Normalized</span></tt></a></td>
-<td>Normalized(f, bound, nint=1000, warnfloat=1)</td>
+<td>Normalized(f, bound, nint=300, warnfloat=1)</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="api.html#probfit.functor.Extended" title="probfit.functor.Extended"><tt class="xref py py-obj docutils literal"><span class="pre">Extended</span></tt></a></td>
 <td>Extended(f, extname=&#8217;N&#8217;)</td>

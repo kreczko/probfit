@@ -67,7 +67,7 @@
 <dl class="class">
 <dt id="probfit.costfunc.UnbinnedLH">
 <em class="property">class </em><tt class="descclassname">probfit.costfunc.</tt><tt class="descname">UnbinnedLH</tt><a class="headerlink" href="#probfit.costfunc.UnbinnedLH" title="Permalink to this definition">¶</a></dt>
-<dd><p>UnbinnedLH(f, data, weights=None, extended=False, extended_bound=None, extended_nint=1000, badvalue=-100000)</p>
+<dd><p>UnbinnedLH(f, data, weights=None, extended=False, extended_bound=None, extended_nint=100, badvalue=-100000)</p>
 <p>__init__(self, f, data , weights=None, badvalue=-100000)</p>
 <p>Construct -log(unbinned likelihood) from callable <em>f</em>
 and data points <em>data</em>. Currently can only do 1D fit.</p>
@@ -106,8 +106,8 @@ likelihood</p>
 <li><p class="first"><strong>extended_bound</strong> Bound for calculating extended term.
 Default None(minimum and maximum of data will be used).</p>
 </li>
-<li><p class="first"><strong>extended_nint</strong> number of trapezoid pieces to sum up as 
-integral for extende Term. Default 1000.</p>
+<li><p class="first"><strong>extended_nint</strong> number pieces to sum up as 
+integral for extended Term(using simpson3/8). Default 100.</p>
 </li>
 </ul>
 </div></blockquote>
@@ -121,7 +121,7 @@ and write document telling people about the caveat.</p>
 </div>
 <dl class="method">
 <dt id="probfit.costfunc.UnbinnedLH.__call__">
-<tt class="descname">__call__</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#probfit.costfunc.UnbinnedLH.__call__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__call__</tt><big>(</big><big>)</big><a class="headerlink" href="#probfit.costfunc.UnbinnedLH.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute sum of -log(lh) given positional arguments.
 Position argument will be passed to pdf with independent vairable
 from <cite>data</cite> is given as the frist argument.</p>
@@ -129,33 +129,53 @@ from <cite>data</cite> is given as the frist argument.</p>
 
 <dl class="method">
 <dt id="probfit.costfunc.UnbinnedLH.draw">
-<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>bins=100</em>, <em>ax=None</em>, <em>bound=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>nfbins=200</em>, <em>print_par=True</em>, <em>args=None</em>, <em>errors=None</em>, <em>parts=False</em><big>)</big><a class="headerlink" href="#probfit.costfunc.UnbinnedLH.draw" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>bins=100</em>, <em>ax=None</em>, <em>bound=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>nfbins=200</em>, <em>print_par=True</em>, <em>args=None</em>, <em>errors=None</em>, <em>parts=False</em>, <em>show_errbars=None</em><big>)</big><a class="headerlink" href="#probfit.costfunc.UnbinnedLH.draw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw comparison between histogram of data and pdf.</p>
 <p><strong>Arguments</strong></p>
 <blockquote>
-<div><ul class="simple">
-<li><strong>minuit</strong> Optional but recommended <tt class="docutils literal"><span class="pre">iminuit.Minuit</span></tt> object.
+<div><ul>
+<li><p class="first"><strong>minuit</strong> Optional but recommended <tt class="docutils literal"><span class="pre">iminuit.Minuit</span></tt> object.
 If minuit is not <tt class="docutils literal"><span class="pre">None</span></tt>, the pdf will be drawn using minimum
 value from minuit and parameters and error will be shown.
 If minuit is <tt class="docutils literal"><span class="pre">None</span></tt>, then pdf will be drawn using argument from
-the last call to <tt class="docutils literal"><span class="pre">__call__</span></tt>. Default <tt class="docutils literal"><span class="pre">None</span></tt></li>
-<li><strong>bins</strong> number of bins for histogram. Default 100.</li>
-<li><strong>ax</strong> matplotlib axes. If not given it will be drawn on current
-axes <tt class="docutils literal"><span class="pre">gca()</span></tt>.</li>
-<li><strong>bound</strong> bound for histogram. If <tt class="docutils literal"><span class="pre">None</span></tt> is given the bound
+the last call to <tt class="docutils literal"><span class="pre">__call__</span></tt>. Default <tt class="docutils literal"><span class="pre">None</span></tt></p>
+</li>
+<li><p class="first"><strong>bins</strong> number of bins for histogram. Default 100.</p>
+</li>
+<li><p class="first"><strong>ax</strong> matplotlib axes. If not given it will be drawn on current
+axes <tt class="docutils literal"><span class="pre">gca()</span></tt>.</p>
+</li>
+<li><p class="first"><strong>bound</strong> bound for histogram. If <tt class="docutils literal"><span class="pre">None</span></tt> is given the bound
 will be automatically determined from the data.
 If you given PDF that&#8217;s normalied to a region but some data is
-not within the bound the picture may look funny.</li>
-<li><strong>parmloc</strong> location of parameter print out. This is passed
-directy to legend loc named parameter. Default (0.05,0.95).</li>
-<li><strong>nfbins</strong> how many point pdf should be evaluated. Default 200.</li>
-<li><strong>print_par</strong> print parameters and error on the plot. Default
-True.</li>
-<li><strong>args</strong> Optional. If minuit is not given, parameter value is
+not within the bound the picture may look funny.</p>
+</li>
+<li><p class="first"><strong>parmloc</strong> location of parameter print out. This is passed
+directy to legend loc named parameter. Default (0.05,0.95).</p>
+</li>
+<li><p class="first"><strong>nfbins</strong> how many point pdf should be evaluated. Default 200.</p>
+</li>
+<li><p class="first"><strong>print_par</strong> print parameters and error on the plot. Default
+True.</p>
+</li>
+<li><p class="first"><strong>args</strong> Optional. If minuit is not given, parameter value is
 determined from args. This can be dictionary of the form
-<cite>{&#8216;a&#8217;:1.0, &#8216;b&#8217;:1.0}</cite> or list of values. Default None.</li>
-<li><strong>errors</strong> Optional dictionary of errors. If minuit is not given,
-parameter errors are determined from <strong>errors</strong>. Default None.</li>
+<cite>{&#8216;a&#8217;:1.0, &#8216;b&#8217;:1.0}</cite> or list of values. Default None.</p>
+</li>
+<li><p class="first"><strong>errors</strong> Optional dictionary of errors. If minuit is not given,
+parameter errors are determined from <strong>errors</strong>. Default None.</p>
+</li>
+<li><dl class="first docutils">
+<dt><strong>show_errbars</strong> Optional. Default None. No error bars are drawn</dt>
+<dd><p class="first">&#8216;normal&#8217; : error bar = sqrt(n or sum of weight), 
+&#8216;sumw2&#8217; : error bar = sqrt(sum of weight squared)
+&#8216;poisson&#8217; : asymmetric error bar based on Poisson PDF (not</p>
+<blockquote class="last">
+<div><p>implemented yet)</p>
+</div></blockquote>
+</dd>
+</dl>
+</li>
 </ul>
 </div></blockquote>
 </dd></dl>
@@ -185,7 +205,7 @@ parameter errors are determined from <strong>errors</strong>. Default None.</li>
 <dl class="class">
 <dt id="probfit.costfunc.BinnedLH">
 <em class="property">class </em><tt class="descclassname">probfit.costfunc.</tt><tt class="descname">BinnedLH</tt><a class="headerlink" href="#probfit.costfunc.BinnedLH" title="Permalink to this definition">¶</a></dt>
-<dd><p>BinnedLH(f, data, bins=40, weights=None, bound=None, badvalue=1000000, extended=False, use_w2=False, nint_subdiv=5)</p>
+<dd><p>BinnedLH(f, data, bins=40, weights=None, bound=None, badvalue=1000000, extended=False, use_w2=False, nint_subdiv=1)</p>
 <p>Create a Poisson Binned Likelihood object from given PDF <strong>f</strong> and
 <strong>data</strong> (raw points not histogram). Constant term and expected minimum
 are subtracted off (aka. log likelihood ratio). The exact calculation
@@ -275,14 +295,14 @@ unweighted statistics. Default False.</p>
 </li>
 <li><p class="first"><strong>nint_subdiv</strong> controls how BinnedLH do the integral to find
 expect number of event in each bin. The number represent the 
-number of subdivisions in each bin to do trapezoid sum.
-Default 5.</p>
+number of subdivisions in each bin to do simpson3/8 rule.
+Default 1.</p>
 </li>
 </ul>
 </div></blockquote>
 <dl class="method">
 <dt id="probfit.costfunc.BinnedLH.__call__">
-<tt class="descname">__call__</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedLH.__call__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__call__</tt><big>(</big><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedLH.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate sum -log(poisson binned likelihood) given positional
 arguments</p>
 </dd></dl>
@@ -368,7 +388,7 @@ assumed to be all 1&#8217;s.</p>
 </dl>
 <dl class="method">
 <dt id="probfit.costfunc.Chi2Regression.__call__">
-<tt class="descname">__call__</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#probfit.costfunc.Chi2Regression.__call__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__call__</tt><big>(</big><big>)</big><a class="headerlink" href="#probfit.costfunc.Chi2Regression.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute <span class="math">\(\chi^2\)</span></p>
 </dd></dl>
 
@@ -419,7 +439,7 @@ Default True.</li>
 <dl class="class">
 <dt id="probfit.costfunc.BinnedChi2">
 <em class="property">class </em><tt class="descclassname">probfit.costfunc.</tt><tt class="descname">BinnedChi2</tt><a class="headerlink" href="#probfit.costfunc.BinnedChi2" title="Permalink to this definition">¶</a></dt>
-<dd><p>BinnedChi2(f, data, bins=40, weights=None, bound=None, sumw2=False, nint_subdiv=5)</p>
+<dd><p>BinnedChi2(f, data, bins=40, weights=None, bound=None, sumw2=False, nint_subdiv=1)</p>
 <dl class="docutils">
 <dt>__init__(self, f, data, bins=40, weights=None, bound=None,</dt>
 <dd>sumw2=False):</dd>
@@ -462,14 +482,14 @@ it&#8217;s automatically determined from the data.</p>
 </li>
 <li><p class="first"><strong>nint_subdiv</strong> controls how BinnedChi2 do the integral to find
 expect number of event in each bin. The number represent the 
-number of subdivisions in each bin to do trapezoid sum.
-Default 5.</p>
+number of subdivisions in each bin to do simpson3/8.
+Default 1.</p>
 </li>
 </ul>
 </div></blockquote>
 <dl class="method">
 <dt id="probfit.costfunc.BinnedChi2.__call__">
-<tt class="descname">__call__</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedChi2.__call__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__call__</tt><big>(</big><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedChi2.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate <span class="math">\(\chi^2\)</span> given positional arguments</p>
 </dd></dl>
 
@@ -617,7 +637,7 @@ for cost function with index <strong>findex</strong></p>
 <dl class="class">
 <dt id="probfit.functor.Normalized">
 <em class="property">class </em><tt class="descclassname">probfit.functor.</tt><tt class="descname">Normalized</tt><a class="headerlink" href="#probfit.functor.Normalized" title="Permalink to this definition">¶</a></dt>
-<dd><p>Normalized(f, bound, nint=1000, warnfloat=1)</p>
+<dd><p>Normalized(f, bound, nint=300, warnfloat=1)</p>
 <p>Transformed PDF in to a normalized version. The normalization factor is
 cached according the shape parameters(all arguments except the first one).</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
@@ -633,7 +653,7 @@ cached according the shape parameters(all arguments except the first one).</p>
 <dd><ul class="first last simple">
 <li><strong>f</strong> function to normalized.</li>
 <li><strong>bound</strong> bound of the normalization.</li>
-<li><strong>nint</strong> optional number of pieces to integrate. Default 1000.</li>
+<li><strong>nint</strong> optional number of pieces to integrate. Default 300.</li>
 <li><strong>warnfloat</strong> optinal number of times it should warn if integral
 of the given function is really small. This usually indicate
 you bound doesn&#8217;t make sense with given parameters.</li>
