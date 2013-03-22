@@ -121,7 +121,7 @@ and write document telling people about the caveat.</p>
 </div>
 <dl class="method">
 <dt id="probfit.costfunc.UnbinnedLH.__call__">
-<tt class="descname">__call__</tt><big>(</big><big>)</big><a class="headerlink" href="#probfit.costfunc.UnbinnedLH.__call__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__call__</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#probfit.costfunc.UnbinnedLH.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute sum of -log(lh) given positional arguments.
 Position argument will be passed to pdf with independent vairable
 from <cite>data</cite> is given as the frist argument.</p>
@@ -185,11 +185,7 @@ parameter errors are determined from <strong>errors</strong>. Default None.</li>
 <dl class="class">
 <dt id="probfit.costfunc.BinnedLH">
 <em class="property">class </em><tt class="descclassname">probfit.costfunc.</tt><tt class="descname">BinnedLH</tt><a class="headerlink" href="#probfit.costfunc.BinnedLH" title="Permalink to this definition">¶</a></dt>
-<dd><p>BinnedLH(f, data, bins=40, weights=None, bound=None, badvalue=1000000, extended=False, use_w2=False)</p>
-<dl class="docutils">
-<dt>__init__(self, f, data, bins=40, weights=None, bound=None,</dt>
-<dd>badvalue=1000000, extended=False, use_w2=False)</dd>
-</dl>
+<dd><p>BinnedLH(f, data, bins=40, weights=None, bound=None, badvalue=1000000, extended=False, use_w2=False, nint_subdiv=5)</p>
 <p>Create a Poisson Binned Likelihood object from given PDF <strong>f</strong> and
 <strong>data</strong> (raw points not histogram). Constant term and expected minimum
 are subtracted off (aka. log likelihood ratio). The exact calculation
@@ -277,11 +273,16 @@ likelihood or not. Default False.</p>
 <li><p class="first"><strong>use_w2</strong> Scale -log likelihood so that to the original
 unweighted statistics. Default False.</p>
 </li>
+<li><p class="first"><strong>nint_subdiv</strong> controls how BinnedLH do the integral to find
+expect number of event in each bin. The number represent the 
+number of subdivisions in each bin to do trapezoid sum.
+Default 5.</p>
+</li>
 </ul>
 </div></blockquote>
 <dl class="method">
 <dt id="probfit.costfunc.BinnedLH.__call__">
-<tt class="descname">__call__</tt><big>(</big><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedLH.__call__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__call__</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedLH.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate sum -log(poisson binned likelihood) given positional
 arguments</p>
 </dd></dl>
@@ -367,7 +368,7 @@ assumed to be all 1&#8217;s.</p>
 </dl>
 <dl class="method">
 <dt id="probfit.costfunc.Chi2Regression.__call__">
-<tt class="descname">__call__</tt><big>(</big><big>)</big><a class="headerlink" href="#probfit.costfunc.Chi2Regression.__call__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__call__</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#probfit.costfunc.Chi2Regression.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute <span class="math">\(\chi^2\)</span></p>
 </dd></dl>
 
@@ -418,7 +419,7 @@ Default True.</li>
 <dl class="class">
 <dt id="probfit.costfunc.BinnedChi2">
 <em class="property">class </em><tt class="descclassname">probfit.costfunc.</tt><tt class="descname">BinnedChi2</tt><a class="headerlink" href="#probfit.costfunc.BinnedChi2" title="Permalink to this definition">¶</a></dt>
-<dd><p>BinnedChi2(f, data, bins=40, weights=None, bound=None, sumw2=False)</p>
+<dd><p>BinnedChi2(f, data, bins=40, weights=None, bound=None, sumw2=False, nint_subdiv=5)</p>
 <dl class="docutils">
 <dt>__init__(self, f, data, bins=40, weights=None, bound=None,</dt>
 <dd>sumw2=False):</dd>
@@ -459,11 +460,16 @@ it&#8217;s automatically determined from the data.</p>
 <li><p class="first"><strong>sumw2</strong> scale the error using
 <span class="math">\(\sqrt{\sum_{j \in \textrm{bin}_i} w_j^2}\)</span>.</p>
 </li>
+<li><p class="first"><strong>nint_subdiv</strong> controls how BinnedChi2 do the integral to find
+expect number of event in each bin. The number represent the 
+number of subdivisions in each bin to do trapezoid sum.
+Default 5.</p>
+</li>
 </ul>
 </div></blockquote>
 <dl class="method">
 <dt id="probfit.costfunc.BinnedChi2.__call__">
-<tt class="descname">__call__</tt><big>(</big><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedChi2.__call__" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">__call__</tt><big>(</big><em>self</em>, <em>*arg</em><big>)</big><a class="headerlink" href="#probfit.costfunc.BinnedChi2.__call__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calculate <span class="math">\(\chi^2\)</span> given positional arguments</p>
 </dd></dl>
 
@@ -1019,7 +1025,7 @@ applied to. Default None(empty).</li>
 \[\begin{split}f(x;mean,\sigma_L,\sigma_R) =
 \begin{cases}
     \exp \left[ -\frac{1}{2} \left(\frac{x-mean}{\sigma_L}\right)^2 \right], &amp; \mbox{if } x &lt; mean \\
-    \exp \left[ -\frac{1}{2} \left( -\frac{x-mean}{\sigma_R}\right)^2 \right], &amp; \mbox{if } x &gt;= mean
+    \exp \left[ -\frac{1}{2} \left(\frac{x-mean}{\sigma_R}\right)^2 \right], &amp; \mbox{if } x &gt;= mean
 \end{cases}\end{split}\]</div>
 </dd></dl>
 
