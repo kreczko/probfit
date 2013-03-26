@@ -34,6 +34,7 @@
     <script type="text/javascript" src="_static/searchtools.js"></script>
     <script type="text/javascript" src="_static/js/jquery.lightbox-0.5.min.js"></script>
     <link rel="top" title="probfit 1.0.4-dev documentation" href="index.html" />
+    <link rel="next" title="How do I .....?" href="recipe.html" />
     <link rel="prev" title="probfit" href="index.html" /> 
   </head>
   <body>
@@ -43,6 +44,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="recipe.html" title="How do I .....?"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="index.html" title="probfit"
              accesskey="P">previous</a> |</li>
@@ -1105,8 +1109,9 @@ q_y(x;\sigma,x_0,\Lambda) = 1 + \frac{\Lambda(x-x_0)}{\sigma} \times
 <h3>linear<a class="headerlink" href="#linear" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="probfit.pdf.linear">
-<tt class="descclassname">probfit.pdf.</tt><tt class="descname">linear</tt><big>(</big><em>double x</em>, <em>double m</em>, <em>double c</em><big>)</big> &rarr; double<a class="headerlink" href="#probfit.pdf.linear" title="Permalink to this definition">¶</a></dt>
-<dd><p>Linear function.</p>
+<tt class="descclassname">probfit.pdf.</tt><tt class="descname">linear</tt><big>(</big><big>)</big><a class="headerlink" href="#probfit.pdf.linear" title="Permalink to this definition">¶</a></dt>
+<dd><p>_Linear()</p>
+<p>Linear function.</p>
 <div class="math">
 \[f(x;m,c) = mx+c\]</div>
 </dd></dl>
@@ -1144,7 +1149,8 @@ q_y(x;\sigma,x_0,\Lambda) = 1 + \frac{\Lambda(x-x_0)}{\sigma} \times
 \[\begin{split}f(x; c_i) = \sum_{i &lt; \text{order}} c_i x^i\end{split}\]</div>
 <p>User can supply order as integer in which case it uses (c_0....c_n+1)
 default or the list of coefficient name which the first one will be the
-lowest order and the last one will be the highest order</p>
+lowest order and the last one will be the highest order. (order=1 is
+a linear function)</p>
 </dd></dl>
 
 <p>(<a class="reference external" href="./pyplots/pdf/polynomial.py">Source code</a>, <a class="reference external" href="./pyplots/pdf/polynomial.png">png</a>, <a class="reference external" href="./pyplots/pdf/polynomial.hires.png">hires.png</a>, <a class="reference external" href="./pyplots/pdf/polynomial.pdf">pdf</a>)</p>
@@ -1302,6 +1308,9 @@ Default False.</li>
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html"
                         title="previous chapter">probfit</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="recipe.html"
+                        title="next chapter">How do I .....?</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="_sources/api.txt"
@@ -1331,6 +1340,9 @@ Default False.</li>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="recipe.html" title="How do I .....?"
+             >next</a> |</li>
         <li class="right" >
           <a href="index.html" title="probfit"
              >previous</a> |</li>

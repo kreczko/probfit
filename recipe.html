@@ -1,0 +1,169 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+
+    <title>How do I .....? &mdash; probfit 1.0.4-dev documentation</title>
+
+<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+
+
+    
+    <link rel="stylesheet" href="_static/rtd.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/css/jquery.lightbox-0.5.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0.4-dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/searchtools.js"></script>
+    <script type="text/javascript" src="_static/js/jquery.lightbox-0.5.min.js"></script>
+    <link rel="top" title="probfit 1.0.4-dev documentation" href="index.html" />
+    <link rel="prev" title="Full API Documentation" href="api.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="api.html" title="Full API Documentation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">probfit 1.0.4-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+<a href="https://github.com/iminuit/probfit"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="how-do-i">
+<h1>How do I .....?<a class="headerlink" href="#how-do-i" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="tell-probfit-to-use-my-analytical-integral">
+<h2>Tell probfit to use my analytical integral<a class="headerlink" href="#tell-probfit-to-use-my-analytical-integral" title="Permalink to this headline">¶</a></h2>
+<p>probfit checks for method call integrate(bound, nint, <a href="#id1"><span class="problematic" id="id2">*</span></a>arg).
+If such method is available it calls that method to compute definite integral.
+If not it falls back to simpson3/8(cubic approximation).</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">probfit</span> <span class="kn">import</span> <span class="n">integrate1d</span>
+<span class="k">def</span> <span class="nf">line</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">m</span><span class="o">*</span><span class="n">x</span><span class="o">+</span><span class="n">c</span>
+
+<span class="c"># compute integral of line from x=(0,1) using 10 intevals with m=1. and c=2.</span>
+<span class="c"># all probfit internal use this</span>
+
+<span class="c"># no integrate method available probfit use simpson3/8</span>
+<span class="k">print</span> <span class="n">integrate1d</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">)</span> <span class="p">)</span>
+
+<span class="c"># Let us illustrate the point by forcing it to have integral that&#39;s off by</span>
+<span class="c"># factor of two</span>
+<span class="k">def</span> <span class="nf">wrong_line_integral</span><span class="p">(</span><span class="n">bound</span><span class="p">,</span> <span class="n">nint</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span>
+    <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">bound</span>
+    <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="p">(</span><span class="n">m</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mf">2.</span><span class="o">-</span><span class="n">a</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="mf">2.</span><span class="p">)</span><span class="o">+</span><span class="n">c</span><span class="o">*</span><span class="p">(</span><span class="n">b</span><span class="o">-</span><span class="n">a</span><span class="p">))</span> <span class="c"># I know this is wrong</span>
+
+<span class="n">line</span><span class="o">.</span><span class="n">integrate</span> <span class="o">=</span> <span class="n">wrong_line_integral</span>
+<span class="c"># line.integrate = lambda bound, nint, m, c: blah blah # this works too</span>
+
+<span class="c"># yes off by factor of two</span>
+<span class="k">print</span> <span class="n">integrate1d</span><span class="p">(</span><span class="n">line</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="mi">10</span><span class="p">,</span> <span class="p">(</span><span class="mf">1.</span><span class="p">,</span><span class="mf">2.</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">How do I .....?</a><ul>
+<li><a class="reference internal" href="#tell-probfit-to-use-my-analytical-integral">Tell probfit to use my analytical integral</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="api.html"
+                        title="previous chapter">Full API Documentation</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/recipe.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="api.html" title="Full API Documentation"
+             >previous</a> |</li>
+        <li><a href="index.html">probfit 1.0.4-dev documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+<div class="footer">
+    &copy; Copyright 2012, Piti Ongmongkolkul.
+  Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+  <br />Theme based on <a href="http://readthedocs.org/">Read The Docs</a>
+
+</div>
+
+
+
+<script type="text/javascript">
+  var lightbox_setting = {
+    imageLoading:'_static/images/lightbox-ico-loading.gif',
+    imageBtnPrev:'_static/images/lightbox-btn-prev.gif',
+    imageBtnNext:'_static/images/lightbox-btn-next.gif',
+    imageBtnClose:'_static/images/lightbox-btn-close.gif',
+    imageBlank:'_static/images/lightbox-blank.gif'
+  }
+  $('img.lightbox').each(function(){
+    $(this).wrap('<a href="'+$(this).attr('src')+'" class="lb"/>')
+  })
+  $('a.lb').lightBox(lightbox_setting)
+</script>
+
+  </body>
+</html>
