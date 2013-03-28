@@ -133,7 +133,7 @@ from <cite>data</cite> is given as the frist argument.</p>
 
 <dl class="method">
 <dt id="probfit.costfunc.UnbinnedLH.draw">
-<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>bins=100</em>, <em>ax=None</em>, <em>bound=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>nfbins=200</em>, <em>print_par=True</em>, <em>args=None</em>, <em>errors=None</em>, <em>parts=False</em>, <em>show_errbars=None</em><big>)</big><a class="headerlink" href="#probfit.costfunc.UnbinnedLH.draw" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>bins=100</em>, <em>ax=None</em>, <em>bound=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>nfbins=200</em>, <em>print_par=True</em>, <em>args=None</em>, <em>errors=None</em>, <em>parts=False</em>, <em>show_errbars='normal'</em><big>)</big><a class="headerlink" href="#probfit.costfunc.UnbinnedLH.draw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw comparison between histogram of data and pdf.</p>
 <p><strong>Arguments</strong></p>
 <blockquote>
@@ -170,13 +170,12 @@ determined from args. This can be dictionary of the form
 parameter errors are determined from <strong>errors</strong>. Default None.</p>
 </li>
 <li><dl class="first docutils">
-<dt><strong>show_errbars</strong> Optional. Default None. No error bars are drawn</dt>
-<dd><ul class="first simple">
-<li>&#8216;normal&#8217; : error bar = sqrt(n or sum of weight),</li>
-<li>&#8216;sumw2&#8217; : error bar = sqrt(sum of weight squared)</li>
-<li>&#8216;poisson&#8217; : asymmetric error bar based on Poisson PDF (not</li>
-</ul>
-<p class="last">implemented yet)</p>
+<dt><strong>show_errbars</strong> Show error bars. Default &#8216;normal&#8217;</dt>
+<dd><p class="first">&#8216;normal&#8217; : error = sqrt( sum of weight )
+&#8216;sumw2&#8217;  : error = sqrt( sum of weight**2 )</p>
+<blockquote class="last">
+<div><p>None : no errorbars (shown as a step histogram)</p>
+</div></blockquote>
 </dd>
 </dl>
 </li>
