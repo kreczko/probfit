@@ -181,6 +181,8 @@ parameter errors are determined from <strong>errors</strong>. Default None.</p>
 </li>
 </ul>
 </div></blockquote>
+<p><strong>Returns</strong></p>
+<p>((data_edges, datay), (errorp,errorm), (total_pdf_x, total_pdf_y), parts)</p>
 </dd></dl>
 
 <dl class="method">
@@ -331,6 +333,8 @@ directy to legend loc named parameter. Default (0.05,0.95).</li>
 Default True.</li>
 </ul>
 </div></blockquote>
+<p><strong>Returns</strong></p>
+<p>((data_edges, datay), (errorp,errorm), (total_pdf_x, total_pdf_y), parts)</p>
 </dd></dl>
 
 <dl class="method">
@@ -397,7 +401,7 @@ assumed to be all 1&#8217;s.</p>
 
 <dl class="method">
 <dt id="probfit.costfunc.Chi2Regression.draw">
-<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>ax=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>print_par=True</em>, <em>args=None</em>, <em>errors=None</em><big>)</big><a class="headerlink" href="#probfit.costfunc.Chi2Regression.draw" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>ax=None</em>, <em>parmloc=(0.05</em>, <em>0.95)</em>, <em>print_par=True</em>, <em>args=None</em>, <em>errors=None</em>, <em>parts=False</em><big>)</big><a class="headerlink" href="#probfit.costfunc.Chi2Regression.draw" title="Permalink to this definition">¶</a></dt>
 <dd><p>Draw comparison between points (<strong>x</strong>,**y**) and the function <strong>f</strong>.</p>
 <p><strong>Arguments</strong></p>
 <blockquote>
@@ -413,8 +417,11 @@ axes <tt class="docutils literal"><span class="pre">gca()</span></tt>.</li>
 directy to legend loc named parameter. Default (0.05,0.95).</li>
 <li><strong>print_par</strong> print parameters and error on the plot.
 Default True.</li>
+<li><strong>parts</strong> draw components of PDF. Default False.</li>
 </ul>
 </div></blockquote>
+<p><strong>Returns</strong></p>
+<p>((data_x, datay), (errorp,errorm), (total_pdf_x, total_pdf_y), parts)</p>
 </dd></dl>
 
 <dl class="method">
@@ -517,6 +524,8 @@ directy to legend loc named parameter. Default (0.05,0.95).</li>
 Default True.</li>
 </ul>
 </div></blockquote>
+<p><strong>Returns</strong></p>
+<p>((data_edges, datay), (errorp,errorm), (total_pdf_x, total_pdf_y), parts)</p>
 </dd></dl>
 
 <dl class="method">
@@ -575,7 +584,9 @@ for cost function with index <strong>findex</strong></p>
 <dl class="method">
 <dt id="probfit.costfunc.SimultaneousFit.draw">
 <tt class="descname">draw</tt><big>(</big><em>self</em>, <em>minuit=None</em>, <em>args=None</em>, <em>errors=None</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#probfit.costfunc.SimultaneousFit.draw" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>Draw each pdf along with data on plotting grid</p>
+<p>return list of return values from each cost function</p>
+</dd></dl>
 
 <dl class="method">
 <dt id="probfit.costfunc.SimultaneousFit.show">
@@ -1193,7 +1204,7 @@ version of:</p>
 <h3>draw_pdf<a class="headerlink" href="#draw-pdf" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="probfit.plotting.draw_pdf">
-<tt class="descclassname">probfit.plotting.</tt><tt class="descname">draw_pdf</tt><big>(</big><em>f</em>, <em>arg</em>, <em>bound</em>, <em>bins=100</em>, <em>scale=1.0</em>, <em>density=True</em>, <em>normed_pdf=False</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#probfit.plotting.draw_pdf" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">probfit.plotting.</tt><tt class="descname">draw_pdf</tt><big>(</big><em>f</em>, <em>arg</em>, <em>bound</em>, <em>bins=100</em>, <em>scale=1.0</em>, <em>density=True</em>, <em>normed_pdf=False</em>, <em>ax=None</em>, <em>**kwds</em><big>)</big><a class="headerlink" href="#probfit.plotting.draw_pdf" title="Permalink to this definition">¶</a></dt>
 <dd><p>draw pdf with given argument and bounds.</p>
 <p><strong>Arguments</strong></p>
 <blockquote>
@@ -1220,7 +1231,7 @@ variable</li>
 <h3>draw_compare_hist<a class="headerlink" href="#draw-compare-hist" title="Permalink to this headline">¶</a></h3>
 <dl class="function">
 <dt id="probfit.plotting.draw_compare_hist">
-<tt class="descclassname">probfit.plotting.</tt><tt class="descname">draw_compare_hist</tt><big>(</big><em>f</em>, <em>arg</em>, <em>data</em>, <em>bins=100</em>, <em>bound=None</em>, <em>weights=None</em>, <em>normed=False</em>, <em>use_w2=False</em>, <em>parts=False</em><big>)</big><a class="headerlink" href="#probfit.plotting.draw_compare_hist" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">probfit.plotting.</tt><tt class="descname">draw_compare_hist</tt><big>(</big><em>f</em>, <em>arg</em>, <em>data</em>, <em>bins=100</em>, <em>bound=None</em>, <em>ax=None</em>, <em>weights=None</em>, <em>normed=False</em>, <em>use_w2=False</em>, <em>parts=False</em>, <em>grid=True</em><big>)</big><a class="headerlink" href="#probfit.plotting.draw_compare_hist" title="Permalink to this definition">¶</a></dt>
 <dd><p>draw histogram of data with poisson error bar and f(x,*arg).</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">np</span><span class="o">.</span><span class="n">rannd</span><span class="p">(</span><span class="mi">10000</span><span class="p">)</span>
 <span class="n">f</span> <span class="o">=</span> <span class="n">gaussian</span>
