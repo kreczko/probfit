@@ -764,6 +764,37 @@ integration here we will be off by a little bit.</p>
 </dd></dl>
 
 </div>
+<div class="section" id="blindfunc">
+<h3>BlindFunc<a class="headerlink" href="#blindfunc" title="Permalink to this headline">¶</a></h3>
+<dl class="class">
+<dt id="probfit.functor.BlindFunc">
+<em class="property">class </em><tt class="descclassname">probfit.functor.</tt><tt class="descname">BlindFunc</tt><a class="headerlink" href="#probfit.functor.BlindFunc" title="Permalink to this definition">¶</a></dt>
+<dd><p>BlindFunc(f, toblind, seedstring, width=1, signflip=True)</p>
+<p>Transform a given parameter in the given <strong>f</strong> by a random shift
+so that the analyst won&#8217;t see the true fitted value.</p>
+<div class="math">
+\[BlindFunc(f, 'y', '123')(x, y , z) = f(x, y\pm \delta, z)\]</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">sigma</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">gaussian</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">mu</span><span class="p">,</span><span class="n">sigma</span><span class="p">)</span>
+<span class="n">g</span><span class="o">=</span> <span class="n">BlindFunc</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">toblind</span><span class="o">=</span><span class="s">&#39;mu&#39;</span><span class="p">,</span> <span class="n">seedstring</span><span class="o">=</span> <span class="s">&#39;abcxyz&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">signflip</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="n">describe</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="c"># [&#39;x&#39;, &#39;mu&#39;, &#39;sigma&#39;]</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt><strong>Arguments</strong></dt>
+<dd><ul class="first last simple">
+<li><strong>f</strong> call object. A function or PDF.</li>
+<li><strong>toblind</strong> the name of parameter to be blinded</li>
+<li><strong>seedstring</strong> a string random number seed to control the random shift</li>
+<li><strong>width</strong> a Gaussian width that controls the random shift</li>
+<li><strong>signflip</strong> if True, sign of the parameter may be flipped
+before being shifted.</li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
 <div class="section" id="addpdf">
 <h3>AddPdf<a class="headerlink" href="#addpdf" title="Permalink to this headline">¶</a></h3>
 <dl class="class">
@@ -1283,6 +1314,7 @@ Default False.</li>
 <li><a class="reference internal" href="#extended">Extended</a></li>
 <li><a class="reference internal" href="#normalized">Normalized</a></li>
 <li><a class="reference internal" href="#convolve">Convolve</a></li>
+<li><a class="reference internal" href="#blindfunc">BlindFunc</a></li>
 <li><a class="reference internal" href="#addpdf">AddPdf</a></li>
 <li><a class="reference internal" href="#addpdfnorm">AddPdfNorm</a></li>
 <li><a class="reference internal" href="#rename">rename</a></li>
